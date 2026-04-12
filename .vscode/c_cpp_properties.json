@@ -1,0 +1,16 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:\\Users\\conno\\SFML-3.0.0\\include"
+
+            ],
+            "compilerPath": "C:\\Users\\conno\\mingw64\\bin\\g++.exe",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-gcc-x64"
+        }
+    ],
+    "version": 4
+}

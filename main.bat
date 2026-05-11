@@ -1,1 +1,2 @@
 g++ main.cpp -IC:\Users\conno\SFML-3.0.0\include -LC:\Users\conno\SFML-3.0.0\lib -lsfml-graphics -lsfml-window -lsfml-system -o ./bin/main.exe 
+.\bin\main.exe

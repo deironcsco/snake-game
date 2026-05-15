@@ -1,25 +1,30 @@
+#ifndef style_h
+#define style_h
+
 #include <SFML/Graphics.hpp>
 #include "Window.h"
 
 // styling and for making componenets
 
 // colors
-sf::Color green{ 30, 170, 0 };
-sf::Color black{ 0, 0, 0 };
+inline sf::Color green{ 30, 170, 0 };
+inline sf::Color black{ 0, 0, 0 };
 
 // positions
-sf::Vector2f button_position{ 300, 400 };
+inline sf::Vector2f button_position{ 300, 400 };
 
 // outline thickness for shapes
-float outline_thickness;
+inline float outline_thickness;
 
 // shapes
-const sf::Font font("CaviarDreams.ttf");
+inline const sf::Font font("CaviarDreams.ttf");
 
 // text size
-unsigned int normal_text_size{ 30 };
+inline unsigned int normal_text_size{ 30 };
 
 // since outline thickness is dependent on the grid size of the window
-void initStyle(Window& window) {
+inline void initStyle(Window& window) {
     outline_thickness = -window.getSquareSize<float>() / 10;
 }
+
+#endif

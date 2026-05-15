@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "../include/Window.h"
 #include "../include/Style.h"
+#include "../include/StartButton.h"
 
 
 enum game_state {
@@ -22,49 +23,29 @@ int main() {
     
     initStyle(window);
     
-    // START BUTTON
-    // start button bg
-    float startbutton_bgx{ 150 };
-    float startbutton_bgy{ 100 };
-    sf::RectangleShape startbutton_bg({startbutton_bgx, startbutton_bgy});
-    startbutton_bg.setFillColor(green);
-    startbutton_bg.setOutlineColor(black);
-    startbutton_bg.setOutlineThickness(outline_thickness);
-    startbutton_bg.setOrigin({startbutton_bgx/2, startbutton_bgy/2}); // half of its dimensions
-    startbutton_bg.setPosition(button_position);
-    // start button text
-    float startbutton_textx{ 80 };
-    float startbutton_texty{ 30 };
-    sf::Text startbutton_text(font, "START", normal_text_size);
-    startbutton_text.setOrigin({startbutton_textx/2, startbutton_texty/2});
-    startbutton_text.setPosition(button_position);
-    // start button boundaries
-    float startbuttonx_lbound{ button_position.x - startbutton_bgx/2 }; // origin +- half of size
-    float startbuttonx_ubound{ button_position.x + startbutton_bgx/2 };
-    float startbuttony_lbound{ button_position.y - startbutton_bgy/2 };
-    float startbuttony_ubound{ button_position.y + startbutton_bgy/2 };
+    StartButton sb = StartButton();
+
+    // TODO onClick for sb
+    // TODO window cursor manip
 
     while( rw.isOpen() ) {
         while( std::optional event = rw.pollEvent() ) {
+            int x{ sf::Mouse::getPosition(rw).x };
+            int y{ sf::Mouse::getPosition(rw).y };
+
             if ( event->is<sf::Event::Closed>() ) {
                 rw.close();
             }
 
             //button functionality to start button
             if (event->is<sf::Event::MouseButtonPressed>()) {
-                if (sf::Mouse::getPosition(rw).x < startbuttonx_ubound && 
-                sf::Mouse::getPosition(rw).x > startbuttonx_lbound && 
-                sf::Mouse::getPosition(rw).y < startbuttony_ubound && 
-                sf::Mouse::getPosition(rw).y > startbuttony_lbound) {
+                if (sb.inBounds(x, y)) {
                     gs = start_game;
                 }
                 std::cout << "gs: " << gs << "\n";
             }
 
-            if (sf::Mouse::getPosition(rw).x < startbuttonx_ubound && 
-            sf::Mouse::getPosition(rw).x > startbuttonx_lbound && 
-            sf::Mouse::getPosition(rw).y < startbuttony_ubound && 
-            sf::Mouse::getPosition(rw).y > startbuttony_lbound) {
+            if (sb.inBounds(x, y)) {
                 const auto cursor = sf::Cursor::createFromSystem(sf::Cursor::Type::Hand).value(); //.value() because optional. have to make a cursor before passing to window
                 rw.setMouseCursor(cursor);
                 window.setCursorIsArrow(false);
@@ -79,8 +60,8 @@ int main() {
             
         }
         rw.clear();
-        rw.draw( startbutton_bg );
-        rw.draw( startbutton_text );
+        rw.draw( sb.getBg() );
+        rw.draw( sb.getText() );
         rw.display();
     }
     return 0;

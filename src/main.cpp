@@ -26,7 +26,6 @@ int main() {
     StartButton sb = StartButton();
 
     // TODO onClick for sb
-    // TODO window cursor manip
 
     while( rw.isOpen() ) {
         while( std::optional event = rw.pollEvent() ) {
@@ -46,19 +45,14 @@ int main() {
             }
 
             if (sb.inBounds(x, y)) {
-                const auto cursor = sf::Cursor::createFromSystem(sf::Cursor::Type::Hand).value(); //.value() because optional. have to make a cursor before passing to window
-                rw.setMouseCursor(cursor);
-                window.setCursorIsArrow(false);
+                window.setCursorHand( rw );
             }
             // back to normal if not hovering
             else if (!window.getCursorIsArrow()) {
-                const auto cursor = sf::Cursor::createFromSystem(sf::Cursor::Type::Arrow).value(); //.value() because optional. have to make a cursor before passing to window
-                rw.setMouseCursor(cursor);
-                window.setCursorIsArrow(true);
+                window.setCursorArrow( rw );
             }
-
-            
         }
+
         rw.clear();
         rw.draw( sb.getBg() );
         rw.draw( sb.getText() );

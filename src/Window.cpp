@@ -20,10 +20,19 @@ sf::RenderWindow& Window::getWindow() {
     return window;
 };
 
-void Window::setCursorIsArrow(bool val) {
-    cursor_is_arrow = val;
-};
-
 bool Window::getCursorIsArrow() {
     return cursor_is_arrow;
 };
+
+void Window::setCursorArrow(sf::RenderWindow& rw) {
+    const auto cursor = sf::Cursor::createFromSystem(sf::Cursor::Type::Arrow).value(); //.value() because optional. have to make a cursor before passing to window
+    rw.setMouseCursor(cursor);
+    cursor_is_arrow = true;
+}
+
+void Window::setCursorHand(sf::RenderWindow& rw) {
+    const auto cursor = sf::Cursor::createFromSystem(sf::Cursor::Type::Hand).value(); //.value() because optional. have to make a cursor before passing to window
+    rw.setMouseCursor(cursor);
+    cursor_is_arrow = false;
+}
+

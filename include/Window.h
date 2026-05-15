@@ -17,8 +17,9 @@ public:
     template<typename T> T getSquareSize() {
         return (T)square_size;
     }
-    void setCursorIsArrow(bool);
     bool getCursorIsArrow();
+    void setCursorArrow(sf::RenderWindow&);
+    void setCursorHand(sf::RenderWindow&);
 };
 
 #endif

@@ -1,23 +1,12 @@
 #include <iostream>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include "../include/Window.h"
 
 
 int main() {
 
-    // window control 
-    int window_size{ 600 }; // pixel size
-    unsigned int windowsize_factor { 12 }; // how many squares there are for snake (e.g. wsf = 12 means 12x12 grid)
-    unsigned int usquare_size{ window_size / windowsize_factor }; // pixel size of the squares, unsigned int
-    sf::Vector2u usquare_vector{ usquare_size, usquare_size }; // vector of square size
-    int isquare_size{ (int)usquare_size }; // usquare_size as int
-    sf::RenderWindow window( sf::VideoMode( windowsize_factor * usquare_vector ), "Snake" );
-    //disable manipulating window size (cuz it fucks with graphics)
-    const std::optional<sf::Vector2u> windowsize_v{ windowsize_factor * usquare_vector };
-    window.setMinimumSize( windowsize_v );
-    window.setMaximumSize( windowsize_v );
-    // does this go in window shit?
-    bool cursor_is_arrow{ true }; //for cursor being arrow
+    Window window{ 12 };
    
     // control
     bool start_game{ false };
@@ -27,7 +16,7 @@ int main() {
     sf::Color green{ 30, 170, 0 };
     sf::Color black{ 0, 0, 0 };
     sf::Vector2f button_position{ 300, 400 };
-    float outline_thickness{ -(float)isquare_size / 10 };
+    float outline_thickness{ -window.getSquareSize<float>() / 10 };
     const sf::Font font("CaviarDreams.ttf");
     unsigned int normaltext_size{ 30 };
 
@@ -79,13 +68,13 @@ int main() {
             sf::Mouse::getPosition(window).y > startbuttony_lbound) {
                 const auto cursor = sf::Cursor::createFromSystem(sf::Cursor::Type::Hand).value(); //.value() because optional. have to make a cursor before passing to window
                 window.setMouseCursor(cursor);
-                cursor_is_arrow = false;
+                window.setCursorIsArrow(false);
             }
             // back to normal if not hovering
-            else if (!cursor_is_arrow) {
+            else if (!window.getCursorIsArrow()) {
                 const auto cursor = sf::Cursor::createFromSystem(sf::Cursor::Type::Arrow).value(); //.value() because optional. have to make a cursor before passing to window
                 window.setMouseCursor(cursor);
-                cursor_is_arrow = true;
+                window.setCursorIsArrow(true);
             }
 
             

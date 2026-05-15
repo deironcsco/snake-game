@@ -5,10 +5,9 @@
 #include <SFML/Window.hpp>
 #include "Style.h"
 #include "Bound.h"
+#include "GameState.h"
 
-// TODO drawable
-
-class StartButton {
+class StartButton : public sf::Drawable {
 private:
     // background object
     sf::Vector2f bg_v{ 150, 100 };
@@ -32,6 +31,8 @@ public:
     bool inBounds( int, int );
     sf::RectangleShape& getBg();
     sf::Text& getText();
+    void draw(sf::RenderTarget&, sf::RenderStates) const override;
+    void onClick(GameState&);
 };
 
 #endif

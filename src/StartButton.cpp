@@ -25,3 +25,12 @@ sf::RectangleShape& StartButton::getBg() {
 sf::Text& StartButton::getText() {
     return text;
 }
+
+void StartButton::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+    target.draw(bg, states);
+    target.draw(text, states);
+}
+
+void StartButton::onClick(GameState& gs) {
+    gs = start_game;
+}

@@ -4,12 +4,8 @@
 #include "../include/Window.h"
 #include "../include/Style.h"
 #include "../include/StartButton.h"
+#include "../include/GameState.h"
 
-
-enum game_state {
-    title_screen,
-    start_game
-};
 
 int main() {
 
@@ -19,13 +15,11 @@ int main() {
     Window window{ window_size_factor, window_size_px };
     sf::RenderWindow& rw = window.getWindow();
    
-    game_state gs = title_screen;
+    GameState gs = title_screen;
     
     initStyle(window);
     
     StartButton sb = StartButton();
-
-    // TODO onClick for sb
 
     while( rw.isOpen() ) {
         while( std::optional event = rw.pollEvent() ) {
@@ -39,7 +33,7 @@ int main() {
             //button functionality to start button
             if (event->is<sf::Event::MouseButtonPressed>()) {
                 if (sb.inBounds(x, y)) {
-                    gs = start_game;
+                    sb.onClick(gs);
                 }
                 std::cout << "gs: " << gs << "\n";
             }
@@ -54,8 +48,7 @@ int main() {
         }
 
         rw.clear();
-        rw.draw( sb.getBg() );
-        rw.draw( sb.getText() );
+        rw.draw( sb );
         rw.display();
     }
     return 0;

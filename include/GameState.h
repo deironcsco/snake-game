@@ -1,5 +1,5 @@
-#ifndef gamestate_h
-#define gamestate_h
+#ifndef GAMESTATE_H
+#define GAMESTATE_H
 
 // flag indicating where we are in the game
 // e.g. are you in the title screen, or are you playing, etc.

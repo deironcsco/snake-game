@@ -1,5 +1,5 @@
-#ifndef bound_h
-#define bound_h
+#ifndef BOUND_H
+#define BOUND_H
 
 // To define the bounds of objects, e.g. backgrounds
 // what mouse position is in bound / not in bound

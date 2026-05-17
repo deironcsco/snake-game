@@ -1,5 +1,5 @@
-#ifndef style_h
-#define style_h
+#ifndef STYLE_H
+#define STYLE_H
 
 #include <SFML/Graphics.hpp>
 #include "Window.h"

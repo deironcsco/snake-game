@@ -1,5 +1,5 @@
-#ifndef startbutton_h
-#define startbutton_h
+#ifndef STARTBUTTON_H
+#define STARTBUTTON_H
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>

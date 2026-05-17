@@ -1,36 +1,43 @@
 #include "../include/StartButton.h"
 
+// implementation for StartButton
+
+// constructor
 StartButton::StartButton() {
-    // bg 
-    bg.setFillColor( green );
-    bg.setOutlineColor( black );
-    bg.setOutlineThickness( outline_thickness );
-    bg.setOrigin( { bg_v.x / 2, bg_v.y / 2 } ); // half of its dimensions
-    bg.setPosition( button_position );
+    // bg init
+    background.setFillColor( green );
+    background.setOutlineColor( black );
+    background.setOutlineThickness( outline_thickness );
+    background.setOrigin( { background_size.x / 2, background_size.y / 2 } ); // half of its dimensions
+    background.setPosition( button_position );
 
-    // text
-    text.setOrigin( { text_v.x / 2, text_v.y / 2 } );
+    // text init
+    text.setOrigin( { text_size.x / 2, text_size.y / 2 } );
     text.setPosition( button_position );
-
 };
 
 bool StartButton::inBounds( int x, int y ) {
     return bnd.inBounds( x, y );
 }
 
+
+
+// getters
 sf::RectangleShape& StartButton::getBg() {
-    return bg;
+    return background;
 }
 
 sf::Text& StartButton::getText() {
     return text;
 }
 
-void StartButton::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-    target.draw(bg, states);
-    target.draw(text, states);
+
+
+void StartButton::draw( sf::RenderTarget& target, sf::RenderStates states ) const {
+    target.draw( background, states );
+    target.draw( text, states );
 }
 
-void StartButton::onClick(GameState& gs) {
+void StartButton::onClick( GameState& gs ) {
     gs = start_game;
 }

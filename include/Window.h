@@ -1,8 +1,11 @@
-#ifndef window_h // header guard? 
+#ifndef window_h
 #define window_h
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+
+// Window object to group some non-game logic / setup
+// e.g. size of window, changing cursor 
 
 class Window {
 private:
@@ -12,14 +15,19 @@ private:
     int square_size; // pixel size of square
     bool cursor_is_arrow; // true if cursor is arrow
 public:
-    Window(unsigned int, unsigned int); // constructor
+    Window( unsigned int, unsigned int ); // constructor
+    
+    // getters
     sf::RenderWindow& getWindow();
     template<typename T> T getSquareSize() {
         return (T)square_size;
     }
     bool getCursorIsArrow();
-    void setCursorArrow(sf::RenderWindow&);
-    void setCursorHand(sf::RenderWindow&);
+    
+    // setters
+    // TODO abstract out and create an enumerated for arrow, hand, etc.
+    void setCursorArrow( sf::RenderWindow& );
+    void setCursorHand( sf::RenderWindow& );
 };
 
 #endif

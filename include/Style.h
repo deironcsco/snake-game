@@ -17,13 +17,13 @@ inline sf::Vector2f button_position{ 300, 400 };
 inline float outline_thickness;
 
 // shapes
-inline const sf::Font font("CaviarDreams.ttf");
+inline const sf::Font font( "CaviarDreams.ttf" );
 
 // text size
 inline unsigned int normal_text_size{ 30 };
 
 // since outline thickness is dependent on the grid size of the window
-inline void initStyle(Window& window) {
+inline void initStyle( Window& window ) {
     outline_thickness = -window.getSquareSize<float>() / 10;
 }
 

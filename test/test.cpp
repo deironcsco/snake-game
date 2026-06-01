@@ -1,9 +1,14 @@
 #include <iostream>
-#include "class.h"
 
-int main(void) {
-    Bruh b{ 5 };
+#include "../include/Window.h"
+#include "../include/Exception.h"
+#include "../include/test/TestWindow.h"
 
-    std::cout << "bruh: " << b.getBruh() << "\n";
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
+
+
+int main() {
+    TestWindow();
     return 0;
 }

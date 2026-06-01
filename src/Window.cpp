@@ -1,11 +1,13 @@
 #include "../include/Window.h"
 #include <iostream>
-
-// implementation file for Window
+#include "../include/Exception.h"
 
 Window::Window( unsigned int s_window_grid_size, unsigned int s_window_size_px ) : 
 window_grid_size( s_window_grid_size ),
 window_size_px( s_window_size_px ) { 
+    if (window_grid_size == 0 ) {
+        throw DivideByZeroException{};
+    }
     square_size = window_size_px / window_grid_size;
 
     window = { sf::VideoMode( sf::Vector2u{ window_size_px, window_size_px } ), "Snake" };
@@ -13,8 +15,6 @@ window_size_px( s_window_size_px ) {
     // disable manipulating window size (cuz it fucks with graphics)
     window.setMinimumSize( std::optional { sf::Vector2u{ window_size_px, window_size_px } } );
     window.setMaximumSize( std::optional { sf::Vector2u{ window_size_px, window_size_px } } );
-
-    bool cursor_is_arrow{ true }; // for cursor being arrow
 };
 
 

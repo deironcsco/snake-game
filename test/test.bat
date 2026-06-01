@@ -1,1 +1,0 @@
-g++ test.cpp -I./class -LC:\Users\conno\SnakeGame\test\class -lclass -o test.exe

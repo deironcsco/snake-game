@@ -16,7 +16,7 @@ int main() {
     sf::RenderWindow& rw = window.getWindow();
     
     // init game state
-    GameState gs = title_screen;
+    GameState gs = title_screen; // TODO probably spell all these out lol. rw can stay
     
     // init style
     initStyle( window );

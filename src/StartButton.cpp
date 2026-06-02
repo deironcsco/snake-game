@@ -30,6 +30,8 @@ sf::Text& StartButton::getText() {
     return text;
 }
 
+
+
 // drawable
 
 void StartButton::draw( sf::RenderTarget& target, sf::RenderStates states ) const {

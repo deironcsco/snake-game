@@ -1,7 +1,5 @@
 #include "../include/StartButton.h"
 
-// implementation for StartButton
-
 // constructor
 StartButton::StartButton() {
     // bg init
@@ -23,6 +21,7 @@ bool StartButton::inBounds( int x, int y ) {
 
 
 // getters
+
 sf::RectangleShape& StartButton::getBg() {
     return background;
 }
@@ -31,7 +30,7 @@ sf::Text& StartButton::getText() {
     return text;
 }
 
-
+// drawable
 
 void StartButton::draw( sf::RenderTarget& target, sf::RenderStates states ) const {
     target.draw( background, states );

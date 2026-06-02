@@ -2,7 +2,7 @@
 #define BOUND_H
 
 // To define the bounds of objects, e.g. backgrounds
-// what mouse position is in bound / not in bound
+// is mouse position in bound / not in bound
 
 class Bound {
 public:
@@ -11,7 +11,7 @@ public:
     float y_ubound; // upper bound y value (e.g. top)
     float y_lbound; // " lower bound
     
-    // is input x,y within bounds?
+    // is input x, y within bounds?
     bool inBounds( int x, int y ) {
         return x < x_ubound && 
            x > x_lbound && 

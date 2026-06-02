@@ -9,8 +9,7 @@
 // and printing the names and stuff
 
 // only testing the constructor. everything else is getters and setters
-// constructor only does what?
-// calculates square size, creates a window, and sets size
+// constructor only calculates square size, creates a window, and sets size
 void TestWindow() {
     // happy paths
     TestWindow_ShouldInstantiateWhenInputsArePositive();
@@ -18,6 +17,8 @@ void TestWindow() {
     // sad paths
     // 0 and 0
     TestWindow_ShouldNotInstantiateWhenInputsZero();
+
+    // no edge cases since unsigned int so it can only be 0 or positive
 }
 
 void TestWindow_ShouldInstantiateWhenInputsArePositive() {
@@ -33,6 +34,7 @@ void TestWindow_ShouldInstantiateWhenInputsArePositive() {
     }
 
     // assert window size
+    // TODO should print what the size is
     sf::Vector2u v { w.getWindow().getSize() };
     if ( v.x != 600 ) {
         std::cout << "\tFAIL Window WindowSize x is incorrect!\n";

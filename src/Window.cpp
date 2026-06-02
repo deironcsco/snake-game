@@ -5,7 +5,7 @@
 Window::Window( unsigned int s_window_grid_size, unsigned int s_window_size_px ) : 
 window_grid_size( s_window_grid_size ),
 window_size_px( s_window_size_px ) { 
-    if (window_grid_size == 0 ) {
+    if ( window_grid_size == 0 ) {
         throw DivideByZeroException{};
     }
     square_size = window_size_px / window_grid_size;

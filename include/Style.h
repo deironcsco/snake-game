@@ -4,7 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include "Window.h"
 
-// styling and for making componenets
+// styling and for making components
+// TODO - make it a namespace? so i know where they're coming from?
 
 // colors
 inline sf::Color green{ 30, 170, 0 };

@@ -35,7 +35,10 @@ public:
     // getters 
     sf::RectangleShape& getBg(); 
     sf::Text& getText(); 
-    void draw( sf::RenderTarget&, sf::RenderStates ) const override; // because drawable
+
+    // drawable  
+    void draw( sf::RenderTarget&, sf::RenderStates ) const override;
+    
     void onClick( GameState& ); // functionality for if clicked
 };
 

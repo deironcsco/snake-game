@@ -9,7 +9,7 @@
 
 class Window {
 private:
-    sf::RenderWindow window; // sfml window instance
+    sf::RenderWindow window; // sfml window instance // TODO change to rw? for consistency
     unsigned int window_grid_size; // grid size e.g. 12x12 grid
     unsigned int window_size_px; // pixel size of window
     int square_size; // pixel size of square
@@ -26,7 +26,7 @@ public:
     
     // setters
     // TODO abstract out and create an enumerated for arrow, hand, etc.
-    void setCursorArrow( sf::RenderWindow& );
+    void setCursorArrow( sf::RenderWindow& ); // TODO doesn't need to pass in the render window? it's a variable aint it?
     void setCursorHand( sf::RenderWindow& );
 };
 

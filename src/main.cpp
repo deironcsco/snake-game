@@ -3,8 +3,10 @@
 #include <SFML/Graphics.hpp>
 #include "../include/Window.h"
 #include "../include/Style.h"
-#include "../include/StartButton.h"
+// #include "../include/StartButton.h"
 #include "../include/GameState.h"
+#include "../include/StartButtonNew.h"
+#include "../include/Button.h"
 
 
 int main() {
@@ -22,7 +24,26 @@ int main() {
     initStyle( window );
     
     // create a start button
-    StartButton sb = StartButton();
+    //StartButton sb = StartButton();
+
+    Control ctrl {
+        gs, window
+    };
+
+    ButtonParams bp {
+        { 150, 100 },
+        {80, 30},
+        normal_text_size,
+        "START",
+        font,
+        button_position,
+        green,
+        black,
+        outline_thickness,
+        ctrl
+    };
+
+    StartButton sb { bp };
 
 
 
@@ -74,7 +95,7 @@ int main() {
             // start button
             if (event->is<sf::Event::MouseButtonPressed>()) {
                 if (sb.inBounds( x, y )) {
-                    sb.onClick( gs );
+                    sb.onClick( ctrl );
                 }
                 //button functionality for quit button
                 else if (sf::Mouse::getPosition( rw ).x > quitbuttonx_lbound &&

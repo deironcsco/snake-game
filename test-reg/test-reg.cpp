@@ -13,7 +13,21 @@ void func7(int, int);
 void normal();
 void reg();
 
+class Bruh {
+private:
+    int a;
+public:
+    Bruh() = default;
+    Bruh(int s_a) : a(s_a) {}
+    int getA() { return a; }
+};
+
 int main() {
+
+    Bruh b;
+    b = Bruh(1);
+    std::cout << b.getA() << "\n";
+
     normal();
     reg();
     return 0;

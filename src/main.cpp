@@ -3,9 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include "../include/Window.h"
 #include "../include/Style.h"
-// #include "../include/StartButton.h"
+#include "../include/StartButton.h"
 #include "../include/GameState.h"
-#include "../include/StartButtonNew.h"
 #include "../include/Button.h"
 
 
@@ -22,15 +21,10 @@ int main() {
     
     // init style
     initStyle( window );
-    
-    // create a start button
-    // StartButton sb = StartButton();
-    // // StartButton sb{}; // ?
 
     Control ctrl {
         gs, window
     };
-
 
     sf::Vector2f sb_bg_size{ 150, 100 };
     sf::Vector2f sb_text_size{ 80, 30 };
@@ -54,7 +48,6 @@ int main() {
     sf::Color red{ 200, 0, 0 };
     unsigned int normaltext_size{ 30 }; //sf::text constructor expecting uint. this just to stop the warning
 
-    
     //quit button bg
     sf::Vector2f quitbutton_position{300, 500}; //button position
     float quitbutton_bgx{ 100 };
@@ -96,7 +89,6 @@ int main() {
             if (event->is<sf::Event::MouseButtonPressed>()) {
                 if (sb.inBounds( x, y )) {
                     sb.onClick( ctrl );
-                    // sb.onClick( gs );
                 }
                 //button functionality for quit button
                 else if (sf::Mouse::getPosition( rw ).x > quitbuttonx_lbound &&

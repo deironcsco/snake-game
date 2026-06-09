@@ -1,6 +1,7 @@
 #include "../include/Button.h"
 
 // constructor
+// TODO make bp a member var? for simplicity?
 Button::Button( ButtonParams* bp ) : 
     background_size( bp->background_size ),
     background( bp->background_size ),

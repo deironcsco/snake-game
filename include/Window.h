@@ -18,7 +18,7 @@ public:
     Window( unsigned int, unsigned int ); // constructor
     
     // getters
-    sf::RenderWindow& getWindow();
+    sf::RenderWindow& getWindow(); // TODO rename to getrenderwindow
     template<typename T> T getSquareSize() {
         return (T)square_size;
     }

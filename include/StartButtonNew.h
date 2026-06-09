@@ -8,7 +8,7 @@
 class StartButton : public Button {
 private:
 public:
-    StartButton( ButtonParams );
+    StartButton( ButtonParams* );
     void onClick( Control ) override;
 };
 

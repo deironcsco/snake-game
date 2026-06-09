@@ -9,8 +9,12 @@
 #include <string> // TODO make sure includes are sorted in each file
 #include "GameState.h"
 #include "Window.h"
+#include <memory>
 
 // TODO move to own header file
+// Control is because idk how to make whatever argument list you want for
+// ...virtual function onClick, so we just putting all game info here so 
+// ...if the buttons need it they can have it all as one struct. yeah?
 struct Control {
     GameState& gs;
     Window& w;
@@ -21,7 +25,7 @@ public:
     sf::Vector2f background_size;
     sf::Vector2f text_size;
     unsigned int font_size;
-    std::string text;
+    sf::String text;
     sf::Font font;
     sf::Vector2f position;
     sf::Color background_color;
@@ -47,7 +51,7 @@ private:
     Control ctrl;
 
 public:
-    Button( ButtonParams ); // constructor
+    Button( ButtonParams* ); // constructor
     bool inBounds( int, int ); // is in bounds, calls Bound::inBounds()
     
     // getters 

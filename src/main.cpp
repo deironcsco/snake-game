@@ -15,40 +15,40 @@ int main() {
     unsigned int window_size_factor{ 12 }; // no magic values. e.g. 12x12 grid
     unsigned int window_size_px{ 600 }; // 600px x 600px
     Window window{ window_size_factor, window_size_px };
-    sf::RenderWindow& rw = window.getWindow();
+    sf::RenderWindow& rw { window.getWindow() };
     
     // init game state
-    GameState gs = title_screen; // TODO probably spell all these out lol. rw can stay
+    GameState gs { title_screen }; // TODO probably spell all these out lol. rw can stay
     
     // init style
     initStyle( window );
     
     // create a start button
-    //StartButton sb = StartButton();
+    // StartButton sb = StartButton();
+    // // StartButton sb{}; // ?
 
     Control ctrl {
         gs, window
     };
 
-    ButtonParams bp {
-        { 150, 100 },
-        {80, 30},
+
+    sf::Vector2f sb_bg_size{ 150, 100 };
+    sf::Vector2f sb_text_size{ 80, 30 };
+    sf::String sb_text{ "START" };
+    std::unique_ptr<ButtonParams> bp{ new ButtonParams{
+        sb_bg_size,
+        sb_text_size,
         normal_text_size,
-        "START",
+        sb_text,
         font,
         button_position,
         green,
         black,
         outline_thickness,
         ctrl
-    };
+    } };
 
-    StartButton sb { bp };
-
-
-
-
-
+    StartButton sb { bp.get() };
 
     // exit button
     sf::Color red{ 200, 0, 0 };
@@ -96,6 +96,7 @@ int main() {
             if (event->is<sf::Event::MouseButtonPressed>()) {
                 if (sb.inBounds( x, y )) {
                     sb.onClick( ctrl );
+                    // sb.onClick( gs );
                 }
                 //button functionality for quit button
                 else if (sf::Mouse::getPosition( rw ).x > quitbuttonx_lbound &&

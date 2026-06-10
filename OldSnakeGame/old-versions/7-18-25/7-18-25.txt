@@ -1,0 +1,18 @@
+yo
+uh right before we try to fix the bug with it going backwards
+most core functionality is there, we just fixing this bug before we 
+get started on the picture collection and stuff
+adjusting grid size by just changing windowsize_factor
+moving automatically, snake functionality, 
+win screen with random picture
+it still prints a picture to the title screen i just haven't turned it off yet
+the a/d though don't work when it's on the title lol
+it has print statements to test the 180 degree turn and stuff
+o
+h it also doesn't work. 
+last thing last night was changing it to direction_queue.front()
+for the 180 degree turn checking
+instead of direction
+in the conditionals and yeah it doesn't work lol.
+
+-cs 7-18-25 720pm

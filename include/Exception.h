@@ -1,3 +1,6 @@
+#ifndef EXCEPTION_H
+#define EXCEPTION_H
+
 #include <string>
 
 class DivideByZeroException {
@@ -7,3 +10,5 @@ public:
     std::string getMessage() { return "Division by Zero Exception"; }
     // TODO does this need to have an implementaiton file? does it matter? when .h vs .cpp?
 };
+
+#endif

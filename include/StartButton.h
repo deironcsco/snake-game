@@ -10,8 +10,8 @@ extern std::unique_ptr<ButtonParams> sb_params;
 class StartButton : public Button {
 private:
 public:
-    StartButton( );
-    void onClick( Control ) override;
+    StartButton();
+    void onClick(Control) override;
 };
 
 

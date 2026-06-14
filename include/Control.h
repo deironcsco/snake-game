@@ -8,14 +8,12 @@
 // ...virtual function onClick, so we just putting all game info here so 
 // ...if the buttons need it they can have it all as one struct. yeah?
 struct Control {
-    GameState& gs;
-    Window& w;
+    GameState* gs;
+    Window* w;
 };
 
 // TODO - make this a pointer?
 // global instance of control, defined in main
-Window def_win; // default window
-GameState def_gs; // default GameState
-Control ctrl { def_gs, def_win }; 
+inline Control g_ctrl{ nullptr, nullptr };
 
 #endif

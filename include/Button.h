@@ -26,7 +26,7 @@ public:
     sf::Color background_color;
     sf::Color outline_color;
     float outline_thickness;
-    Control ctrl;
+    Control ctrl; // TODO reference to a control?
 };
 
 class Button : public sf::Drawable {

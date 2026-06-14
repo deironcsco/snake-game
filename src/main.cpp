@@ -2,6 +2,7 @@
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include <memory>
 
 #include "../include/Window.h"
 #include "../include/Style.h"
@@ -15,18 +16,20 @@ int main() {
     // init window
     unsigned int window_size_factor{ 12 }; // no magic values. e.g. 12x12 grid
     unsigned int window_size_px{ 600 }; // 600px x 600px
-    Window window{ window_size_factor, window_size_px };
-    sf::RenderWindow& rw { window.getWindow() };
+    std::unique_ptr<Window> window = std::make_unique<Window>( Window{ window_size_factor, window_size_px } );
+    // TODO i can make this reference a member var in window so i don't have to pass it into the cursor funcs
+    sf::RenderWindow& rw { window->getWindow() };
     
     // init game state
-    GameState gs { title_screen }; // TODO probably spell all these out lol. rw can stay
+    std::unique_ptr<GameState> gs = std::make_unique<GameState>( GameState{ title_screen }); // TODO probably spell all these out lol. rw can stay
     
     // init style
-    initStyle( window );
+    initStyle( *window );
 
-    Control ctrl {
-        gs, window
-    };
+    // init control
+    g_ctrl.gs = gs.get();
+    g_ctrl.w = window.get();
+    // Control ctrl = { gs.get(), window.get() };
 
     StartButton sb {};
 
@@ -74,7 +77,7 @@ int main() {
             // start button
             if (event->is<sf::Event::MouseButtonPressed>()) {
                 if (sb.inBounds( x, y )) {
-                    sb.onClick( ctrl );
+                    sb.onClick( g_ctrl );
                 }
                 //button functionality for quit button
                 else if (sf::Mouse::getPosition( rw ).x > quitbuttonx_lbound &&
@@ -83,16 +86,16 @@ int main() {
                 sf::Mouse::getPosition( rw ).y < quitbuttony_ubound) {
                     rw.close();
                 }
-                std::cout << "gs: " << gs << "\n";
+                std::cout << "gs: " << *gs << "\n";
             }
             
             // cursor
             if ( sb.inBounds( x, y ) ) {
-                window.setCursorHand( rw );
+                window->setCursorHand( rw );
             }
             // back to normal if not hovering
-            else if ( !window.getCursorIsArrow() ) {
-                window.setCursorArrow( rw );
+            else if ( !window->getCursorIsArrow() ) {
+                window->setCursorArrow( rw );
             }
 
 
@@ -108,11 +111,11 @@ int main() {
             sf::Mouse::getPosition(rw).x > quitbuttonx_lbound && 
             sf::Mouse::getPosition(rw).y > quitbuttony_lbound && 
             sf::Mouse::getPosition(rw).y < quitbuttony_ubound ) {
-                window.setCursorHand( rw );
+                window->setCursorHand( rw );
             }
             //back to arrow if no hover
-            else if ( !window.getCursorIsArrow() ) {
-                window.setCursorHand( rw );
+            else if ( !window->getCursorIsArrow() ) {
+                window->setCursorHand( rw );
             }
 
 

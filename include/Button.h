@@ -1,24 +1,19 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include "Style.h"
-#include "Bound.h"
-#include "GameState.h"
 #include <string> // TODO make sure includes are sorted in each file
-#include "GameState.h"
-#include "Window.h"
 #include <memory>
 
-// TODO move to own header file
-// Control is because idk how to make whatever argument list you want for
-// ...virtual function onClick, so we just putting all game info here so 
-// ...if the buttons need it they can have it all as one struct. yeah?
-struct Control {
-    GameState& gs;
-    Window& w;
-};
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+
+#include "Style.h"
+#include "Bound.h"
+#include "Control.h"
+#include "GameState.h"
+#include "GameState.h"
+#include "Window.h"
+
 
 struct ButtonParams {
 public:

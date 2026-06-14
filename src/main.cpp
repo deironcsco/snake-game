@@ -1,15 +1,17 @@
 #include <iostream>
+
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+
 #include "../include/Window.h"
 #include "../include/Style.h"
 #include "../include/StartButton.h"
 #include "../include/GameState.h"
 #include "../include/Button.h"
+#include "../include/Control.h"
 
 
 int main() {
-
     // init window
     unsigned int window_size_factor{ 12 }; // no magic values. e.g. 12x12 grid
     unsigned int window_size_px{ 600 }; // 600px x 600px
@@ -26,23 +28,7 @@ int main() {
         gs, window
     };
 
-    sf::Vector2f sb_bg_size{ 150, 100 };
-    sf::Vector2f sb_text_size{ 80, 30 };
-    sf::String sb_text{ "START" };
-    std::unique_ptr<ButtonParams> bp{ new ButtonParams{
-        sb_bg_size,
-        sb_text_size,
-        normal_text_size,
-        sb_text,
-        font,
-        button_position,
-        green,
-        black,
-        outline_thickness,
-        ctrl
-    } };
-
-    StartButton sb { bp.get() };
+    StartButton sb {};
 
     // exit button
     sf::Color red{ 200, 0, 0 };

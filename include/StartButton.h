@@ -4,10 +4,13 @@
 #include "Button.h"
 #include "Style.h"
 
+// defined in SB.cpp
+extern std::unique_ptr<ButtonParams> sb_params;
+
 class StartButton : public Button {
 private:
 public:
-    StartButton( ButtonParams* );
+    StartButton( );
     void onClick( Control ) override;
 };
 

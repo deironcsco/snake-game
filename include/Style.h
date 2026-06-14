@@ -10,9 +10,11 @@
 // colors
 inline sf::Color green{ 30, 170, 0 };
 inline sf::Color black{ 0, 0, 0 };
+inline sf::Color red{ 200, 0, 0 };
 
 // positions
 inline sf::Vector2f button_position{ 300, 400 };
+inline sf::Vector2f low_button_position{ 300, 500 };
 
 // outline thickness for shapes
 inline float outline_thickness;

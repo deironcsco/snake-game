@@ -43,7 +43,7 @@ private:
     // origin +- half of size
     Bound bnd;
     
-    Control ctrl;
+    Control ctrl; // TODO make this a pointer
 
 public:
     Button( ButtonParams* ); // constructor
@@ -56,6 +56,7 @@ public:
     // drawable  
     void draw( sf::RenderTarget&, sf::RenderStates ) const override;
     
+    // TODO why do i pass in control when it's a mem var?
     virtual void onClick( Control ) = 0; // functionality for if clicked
 };
 

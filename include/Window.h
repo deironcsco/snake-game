@@ -26,6 +26,7 @@ public:
     
     // setters
     // TODO abstract out and create an enumerated for arrow, hand, etc.
+    // TODO call it setCursorDefault?
     void setCursorArrow( sf::RenderWindow& ); // TODO doesn't need to pass in the render window? it's a variable aint it?
     void setCursorHand( sf::RenderWindow& );
 };

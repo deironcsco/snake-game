@@ -11,6 +11,7 @@
 #include "../include/Button.h"
 #include "../include/Control.h"
 #include "../include/QuitButton.h"
+#include "../include/ObjectRegistry.h"
 
 
 int main() {
@@ -32,43 +33,52 @@ int main() {
     g_ctrl.w = window.get();
     // Control ctrl = { gs.get(), window.get() };
 
+    ObjectRegistry obreg{};
+
     StartButton sb{};
     QuitButton qb{};
+
+    obreg.registerObject( &sb ); // TODO should sb and qb be unique_ptrs and not references? does it not matter?
+    obreg.registerObject( &qb );
 
     while( rw.isOpen() ) {
         while( std::optional event = rw.pollEvent() ) {
             // get mouse functionality
-            int x{ sf::Mouse::getPosition(rw).x };
-            int y{ sf::Mouse::getPosition(rw).y };
+            sf::Vector2i mouse_position{ sf::Mouse::getPosition( rw ) }; 
 
             // close functionality
             if ( event->is<sf::Event::Closed>() ) {
                 rw.close();
             }
 
-            // start button
-            if (event->is<sf::Event::MouseButtonPressed>()) {
-                if (sb.inBounds( x, y )) {
-                    sb.onClick( g_ctrl );
-                }
-                //button functionality for quit button
-                else if (qb.inBounds( x, y )) {
-                    qb.onClick( g_ctrl );
-                }
-                std::cout << "gs: " << *gs << "\n";
-            }
+            obreg.handleEvent( event, mouse_position );
+            obreg.handleHover( mouse_position );
+
+            // // start button
+            // if (event->is<sf::Event::MouseButtonPressed>()) {
+            //     if (sb.inBounds( x, y )) {
+            //         sb.onClick( g_ctrl );
+            //     }
+            //     //button functionality for quit button
+            //     else if (qb.inBounds( x, y )) {
+            //         qb.onClick( g_ctrl );
+            //     }
+            //     std::cout << "gs: " << *gs << "\n";
+            // }
             
-            // cursor
-            if ( sb.inBounds( x, y ) ) {
-                window->setCursorHand( rw );
-            }
-            else if ( qb.inBounds( x, y ) ) {
-                window->setCursorHand( rw );
-            }
-            // back to normal if not hovering
-            else if ( !window->getCursorIsArrow() ) {
-                window->setCursorArrow( rw );
-            }
+            // // cursor
+            // if ( sb.inBounds( x, y ) ) {
+            //     window->setCursorHand( rw );
+            // }
+            // else if ( qb.inBounds( x, y ) ) {
+            //     window->setCursorHand( rw );
+            // }
+            // // back to normal if not hovering
+            // else if ( !window->getCursorIsArrow() ) {
+            //     window->setCursorArrow( rw );
+            // }
+
+
         }
 
         // TODO group all this into a function

@@ -3,7 +3,7 @@ source ./vars.sh
 
 # main-specific vars
 SRC_ROOT="${PROJECT_ROOT}/src"
-PROJECT_SOURCE="${SRC_ROOT}/Window.cpp ${SRC_ROOT}/Button.cpp ${SRC_ROOT}/StartButton.cpp ${SRC_ROOT}/QuitButton.cpp"
+PROJECT_SOURCE="${SRC_ROOT}/Window.cpp ${SRC_ROOT}/Button.cpp ${SRC_ROOT}/StartButton.cpp ${SRC_ROOT}/QuitButton.cpp ${SRC_ROOT}/ObjectRegistry.cpp"
 PROJECT_INCLUDE="-I${PROJECT_ROOT}/include"
 MAIN_FILE="${PROJECT_ROOT}/src/main.cpp"
 

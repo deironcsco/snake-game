@@ -27,11 +27,15 @@ std::unique_ptr<ButtonParams> qb_params = std::make_unique<ButtonParams>(ButtonP
     red,
     black,
     outline_thickness,
-    g_ctrl
+    &g_ctrl
 });
 
 QuitButton::QuitButton() : Button( qb_params.get() ) {};
 
-void QuitButton::onClick( Control ctrl ) {
-    ctrl.w->getWindow().close(); // does this work
+// void QuitButton::onClick( Control ctrl ) {
+//     ctrl.w->getWindow().close(); // does this work
+// }
+
+void QuitButton::handleEvent( std::optional<sf::Event> event, sf::Vector2i mouse_position ) {
+    ctrl->w->getWindow().close();
 }

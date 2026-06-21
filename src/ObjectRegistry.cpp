@@ -2,7 +2,7 @@
 
 ObjectRegistry::ObjectRegistry() = default; // constructor
 
-void ObjectRegistry::draw( sf::RenderTarget& target, sf::RenderStates state ) {
+void ObjectRegistry::draw( sf::RenderTarget& target, sf::RenderStates state ) const {
     for ( int i{ 0 }; i < objs.size(); i++ ) {
         if ( *( ctrl->gs ) == objs[i]->getDrawCondition() ) {
             target.draw( *objs[i], state );

@@ -11,7 +11,7 @@ class QuitButton : public Button {
 private:
 public:
     QuitButton();
-    void onClick(Control) override;
+    void handleEvent( std::optional<sf::Event> event, sf::Vector2i mouse_position ) override;
 };
 
 #endif

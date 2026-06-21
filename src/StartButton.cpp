@@ -18,11 +18,17 @@ std::unique_ptr<ButtonParams> sb_params = std::make_unique<ButtonParams>( Button
     green,
     black,
     outline_thickness,
-    g_ctrl
+    &g_ctrl
 } );
 
 StartButton::StartButton() : Button( sb_params.get() ) {}
 
-void StartButton::onClick( Control ctrl ) {
-    *(ctrl.gs) = start_game;
+// void StartButton::onClick( Control ctrl ) {
+//     *(ctrl.gs) = start_game;
+// }
+
+void StartButton::handleEvent( std::optional<sf::Event> event, sf::Vector2i mouse_position ) {
+    if ( inBounds( mouse_position ) ) {
+        *(ctrl->gs) = start_game;
+    }
 }

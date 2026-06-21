@@ -15,9 +15,9 @@ private:
     Control* ctrl; // reference to game state
 public:
     ObjectRegistry(); // constructor
-    void draw( sf::RenderTarget& target, sf::RenderStates state ); // TODO headers should include names of params
+    void draw( sf::RenderTarget& target, sf::RenderStates state ) const override; // TODO headers should include names of params
     // TODO why can't i override
-    void registerObject( Object* obj );
+    void registerObject( Object* obj ); // TODO could this be an unpack so i can do multiple at once?
     void handleEvent( std::optional<sf::Event> event, sf::Vector2i mouse_position );
     void handleHover( sf::Vector2i mouse_position );
 };

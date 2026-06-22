@@ -1,19 +1,4 @@
 #include "../include/QuitButton.h"
-// #include "../include/Style.h"
-
-// struct ButtonParams {
-// public:
-//     sf::Vector2f background_size;
-//     sf::Vector2f text_size;
-//     unsigned int font_size;
-//     sf::String text;
-//     sf::Font font;
-//     sf::Vector2f position;
-//     sf::Color background_color;
-//     sf::Color outline_color;
-//     float outline_thickness;
-//     Control ctrl; // TODO reference to a control?
-// };
 
 sf::Vector2f qb_bg_size{ 100, 75 }; // TODO this is global scope and can conflict. should probably namespace components?
 sf::Vector2f qb_text_size { 70, 35 };
@@ -37,5 +22,7 @@ QuitButton::QuitButton() : Button( qb_params.get() ) {};
 // }
 
 void QuitButton::handleEvent( std::optional<sf::Event> event, sf::Vector2i mouse_position ) {
-    ctrl->w->getWindow().close();
+    if ( event->is<sf::Event::MouseButtonPressed>() && inBounds( mouse_position ) ) {
+        ctrl->w->getWindow().close();
+    }
 }

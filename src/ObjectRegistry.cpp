@@ -1,6 +1,16 @@
 #include "ObjectRegistry.h"
 
+
+
+// constructors 
+
 ObjectRegistry::ObjectRegistry() = default; // constructor
+
+ObjectRegistry::ObjectRegistry( Control* s_ctrl) : ctrl( s_ctrl ) {};
+
+
+
+// funcs
 
 void ObjectRegistry::draw( sf::RenderTarget& target, sf::RenderStates state ) const {
     for ( int i{ 0 }; i < objs.size(); i++ ) {
@@ -28,7 +38,7 @@ void ObjectRegistry::handleHover( sf::Vector2i mouse_position ) {
             break;
         }
     }  
-    if ( !flag ) {
+    if ( !flag && !ctrl->w->getCursorIsArrow() ) {
         // reset to default if no hover
         ctrl->w->setCursorArrow( ctrl->w->getWindow() );
     }
@@ -36,15 +46,8 @@ void ObjectRegistry::handleHover( sf::Vector2i mouse_position ) {
 
 
 
-/*
-handleHover(mouse_pos) {
-Flag false
-For (size)
-Flag = Objs[size]->handleBounds(mouse)
-If flag break // if i’m hovering over one thing i don’t care about other thing. probably
-If !flag
-Reset cursor
+// getter
+
+Control* ObjectRegistry::getCtrl() {
+    return ctrl;
 }
-
-
-*/

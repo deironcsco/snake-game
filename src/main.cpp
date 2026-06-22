@@ -28,12 +28,12 @@ int main() {
     // init style
     initStyle( *window );
 
-    // init control
+    // init global control struct
     g_ctrl.gs = gs.get();
     g_ctrl.w = window.get();
     // Control ctrl = { gs.get(), window.get() };
 
-    ObjectRegistry obreg{};
+    ObjectRegistry obreg{ &g_ctrl };
 
     StartButton sb{};
     QuitButton qb{};
@@ -50,9 +50,15 @@ int main() {
             if ( event->is<sf::Event::Closed>() ) {
                 rw.close();
             }
-
+            
             obreg.handleEvent( event, mouse_position );
             obreg.handleHover( mouse_position );
+
+            // test gamestate
+            if ( event->is<sf::Event::MouseButtonPressed>() ) {
+                std::cout << "gs " << *(g_ctrl.gs) << "\n";
+            }
+
 
             // // start button
             // if (event->is<sf::Event::MouseButtonPressed>()) {

@@ -13,54 +13,6 @@
 #include "GameState.h"
 #include "GameState.h"
 #include "Window.h"
-
-
-// struct ButtonParams {
-// public:
-//     sf::Vector2f background_size;
-//     sf::Vector2f text_size;
-//     unsigned int font_size;
-//     sf::String text;
-//     sf::Font font;
-//     sf::Vector2f position;
-//     sf::Color background_color;
-//     sf::Color outline_color;
-//     float outline_thickness;
-//     Control ctrl; // TODO reference to a control?
-// };
-
-// class Button : public sf::Drawable {
-// private:
-//     // background object
-//     sf::Vector2f background_size;
-//     sf::RectangleShape background;
-
-//     // text object
-//     sf::Vector2f text_size;
-//     sf::Text text;
-    
-//     // boundaries
-//     // origin +- half of size
-//     Bound bnd;
-    
-//     Control ctrl; // TODO make this a pointer
-
-// public:
-//     Button( ButtonParams* ); // constructor
-//     bool inBounds( int, int ); // is in bounds, calls Bound::inBounds()
-    
-//     // getters 
-//     sf::RectangleShape& getBg(); 
-//     sf::Text& getText(); 
-
-//     // drawable  
-//     void draw( sf::RenderTarget&, sf::RenderStates ) const override;
-    
-//     // TODO why do i pass in control when it's a mem var?
-//     virtual void onClick( Control ) = 0; // functionality for if clicked
-// };
-
-
 #include "Object.h"
 
 // inherit from Object
@@ -93,7 +45,7 @@ protected: // TODO does this really need to be protected? i guess it should be a
     // origin +- half of size
     Bound bnd;
     
-    Control* ctrl; // TODO make this a pointer
+    Control* ctrl;
 
 public:
     Button( ButtonParams* ); // constructor
@@ -109,11 +61,7 @@ public:
     bool handleHover(sf::Vector2i mouse_position) override;
     GameState virtual getDrawCondition() override;
     
-    // TODO why do i pass in control when it's a mem var?
-    // virtual void onClick( Control ) = 0; // functionality for if clicked
-    // the startbutton when inheriting from this will have to implement handleEvent
-
-    // descendents implement Object::handleEvent()
+    // DERIVED NEED TO IMPLEMENT Object::handleEvent()
 };
 
 #endif

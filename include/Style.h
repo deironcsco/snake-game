@@ -26,6 +26,7 @@ inline const sf::Font font( "CaviarDreams.ttf" );
 inline unsigned int normal_text_size{ 30 };
 
 // since outline thickness is dependent on the grid size of the window
+// this will be called in main (or wherever) after window gets instantiated
 inline void initStyle( Window& window ) {
     outline_thickness = -window.getSquareSize<float>() / 10;
 }

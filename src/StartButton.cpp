@@ -23,9 +23,6 @@ std::unique_ptr<ButtonParams> sb_params = std::make_unique<ButtonParams>( Button
 
 StartButton::StartButton() : Button( sb_params.get() ) {}
 
-// void StartButton::onClick( Control ctrl ) {
-//     *(ctrl.gs) = start_game;
-// }
 
 // TODO so button should have the mouse button pressed and inbounds by default, then it should call startbutton::handleevent?
     // is that even possible?
@@ -33,6 +30,6 @@ StartButton::StartButton() : Button( sb_params.get() ) {}
     // yeah like another pure virtual func onClick. i feel like that makes more sense
 void StartButton::handleEvent( std::optional<sf::Event> event, sf::Vector2i mouse_position ) {
     if ( event->is<sf::Event::MouseButtonPressed>() && inBounds( mouse_position ) ) {
-        *(ctrl->gs) = start_game;
+        *(ctrl->game_state) = start_game;
     }
 }

@@ -2,9 +2,7 @@
 
 
 
-// constructors 
-
-ObjectRegistry::ObjectRegistry() = default; // constructor
+// constructor
 
 ObjectRegistry::ObjectRegistry( Control* s_ctrl) : ctrl( s_ctrl ) {};
 
@@ -14,7 +12,7 @@ ObjectRegistry::ObjectRegistry( Control* s_ctrl) : ctrl( s_ctrl ) {};
 
 void ObjectRegistry::draw( sf::RenderTarget& target, sf::RenderStates state ) const {
     for ( int i{ 0 }; i < objs.size(); i++ ) {
-        if ( *( ctrl->gs ) == objs[i]->getDrawCondition() ) {
+        if ( *( ctrl->game_state ) == objs[i]->getDrawCondition() ) {
             target.draw( *objs[i], state );
         }
     }
@@ -38,9 +36,9 @@ void ObjectRegistry::handleHover( sf::Vector2i mouse_position ) {
             break;
         }
     }  
-    if ( !flag && !ctrl->w->getCursorIsArrow() ) {
+    if ( !flag && !ctrl->window->getCursorIsArrow() ) {
         // reset to default if no hover
-        ctrl->w->setCursorArrow( ctrl->w->getWindow() );
+        ctrl->window->setCursorArrow( ctrl->window->getWindow() );
     }
 };
 

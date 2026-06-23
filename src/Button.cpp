@@ -110,7 +110,7 @@ bool Button::inBounds( sf::Vector2i mouse_position ) {
 
 bool Button::handleHover(sf::Vector2i mouse_position) {
     if ( inBounds( mouse_position ) ) { // this->?
-        ctrl->w->setCursorHand( ctrl->w->getWindow() );
+        ctrl->window->setCursorHand( ctrl->window->getWindow() );
         return true;
     }
     return false;

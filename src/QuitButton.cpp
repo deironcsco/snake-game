@@ -17,12 +17,8 @@ std::unique_ptr<ButtonParams> qb_params = std::make_unique<ButtonParams>(ButtonP
 
 QuitButton::QuitButton() : Button( qb_params.get() ) {};
 
-// void QuitButton::onClick( Control ctrl ) {
-//     ctrl.w->getWindow().close(); // does this work
-// }
-
 void QuitButton::handleEvent( std::optional<sf::Event> event, sf::Vector2i mouse_position ) {
     if ( event->is<sf::Event::MouseButtonPressed>() && inBounds( mouse_position ) ) {
-        ctrl->w->getWindow().close();
+        ctrl->window->getWindow().close();
     }
 }

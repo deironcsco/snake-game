@@ -2,6 +2,7 @@
 #define OBJECT_H
 
 #include <SFML/Graphics.hpp>
+
 #include "GameState.h"
 
 class Object : public sf::Drawable {

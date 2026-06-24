@@ -13,7 +13,6 @@ struct Control {
 };
 // they need to be pointers and not references b/c they have to be nullable
 
-// TODO - make this a pointer?
 // global instance of control, defined in main
 inline Control g_ctrl{ nullptr, nullptr };
 

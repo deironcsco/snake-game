@@ -18,10 +18,7 @@ int main() {
     // init window
     unsigned int window_size_factor{ 12 }; // no magic values. e.g. 12x12 grid
     unsigned int window_size_px{ 600 }; // 600px x 600px
-    // TODO do these need to be pointers? since the stuff in main as lifetime as long as the program?
-    // if they don't have to be pointers, don't make them one
     std::unique_ptr<Window> window = std::make_unique<Window>( Window{ window_size_factor, window_size_px } );
-    // TODO i can make this reference a member var in window so i don't have to pass it into the cursor funcs
     sf::RenderWindow& rw { window->getWindow() };
     
     // init game state
@@ -62,7 +59,7 @@ int main() {
             }
         }
 
-        // TODO group all this into a function
+        // TODO when i turn this into a function, pass obreg by reference b/c i ain't copying all that by value bro
         rw.clear();
         rw.draw( obreg );
         rw.display();

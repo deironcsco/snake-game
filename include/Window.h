@@ -18,7 +18,7 @@ public:
     Window( unsigned int, unsigned int ); // constructor
     
     // getters
-    sf::RenderWindow& getWindow(); // TODO rename to getrenderwindow
+    sf::RenderWindow& getWindow();
     template<typename T> T getSquareSize() {
         return (T)square_size;
     }
@@ -27,7 +27,7 @@ public:
     // setters
     // TODO abstract out and create an enumerated for arrow, hand, etc.
     // TODO call it setCursorDefault?
-    void setCursorArrow( sf::RenderWindow& ); // TODO doesn't need to pass in the render window? it's a variable aint it?
+    void setCursorArrow( sf::RenderWindow& );
     void setCursorHand( sf::RenderWindow& );
 };
 

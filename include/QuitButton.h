@@ -4,8 +4,9 @@
 #include "Button.h"
 #include "Style.h"
 
-extern std::unique_ptr<ButtonParams> qb_params; // TODO inline? or external?
+extern std::unique_ptr<ButtonParams> qb_params;
 // when i remove the extern its a multiple definition thing again
+// yeah cause it's defined multiple times dummy. here and in QB.cpp
 
 class QuitButton : public Button {
 private:

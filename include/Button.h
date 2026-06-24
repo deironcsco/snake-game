@@ -1,7 +1,7 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include <string> // TODO make sure includes are sorted in each file
+#include <string>
 #include <memory>
 
 #include <SFML/Graphics.hpp>
@@ -32,7 +32,7 @@ public:
 };
 
 class Button : public Object {
-protected: // TODO does this really need to be protected? i guess it should be accessible to buttons huh
+protected:
     // background object
     sf::Vector2f background_size;
     sf::RectangleShape background;

@@ -4,8 +4,13 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
+// #include "ObjectRegistry.h"
+
 // Window object to group some non-game logic / setup
 // e.g. size of window, changing cursor 
+
+class ObjectRegistry;
+
 
 class Window {
 private:
@@ -13,22 +18,30 @@ private:
     unsigned int window_grid_size; // grid size e.g. 12x12 grid
     unsigned int window_size_px; // pixel size of window
     int square_size; // pixel size of square
-    bool cursor_is_arrow{ true }; // true if cursor is arrow
+    sf::Cursor::Type curr_cursor;
 public:
     Window( unsigned int, unsigned int ); // constructor
+
+    // rw funcs
+    bool isOpen() const; // isOpen is const so...
+    std::optional<sf::Event> pollEvent();
+    void close();
+    void display(ObjectRegistry&); // rw.clear, rw.draw, then rw.display
     
     // getters
-    sf::RenderWindow& getWindow();
+    sf::RenderWindow& getRenderWindow();
     template<typename T> T getSquareSize() {
         return (T)square_size;
     }
-    bool getCursorIsArrow();
+    sf::Cursor::Type getCursor();
     
     // setters
     // TODO abstract out and create an enumerated for arrow, hand, etc.
     // TODO call it setCursorDefault?
-    void setCursorArrow( sf::RenderWindow& );
-    void setCursorHand( sf::RenderWindow& );
+    void setCursor(sf::Cursor::Type);
+
+    
+
 };
 
 #endif

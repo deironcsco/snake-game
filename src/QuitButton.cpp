@@ -5,19 +5,19 @@ sf::Vector2f qb_text_size { 70, 35 };
 std::unique_ptr<ButtonParams> qb_params = std::make_unique<ButtonParams>(ButtonParams {
     qb_bg_size,
     qb_text_size,
-    normal_text_size,
+    Style::normal_text_size,
     "QUIT",
-    font,
-    low_button_position,
-    red,
-    black,
-    outline_thickness,
+    Style::font,
+    Style::low_button_position,
+    Style::red,
+    Style::black,
+    Style::outline_thickness,
 });
 
 QuitButton::QuitButton(Control* s_ctrl) : Button( qb_params.get(), s_ctrl ) {};
 
 void QuitButton::handleEvent( std::optional<sf::Event> event, sf::Vector2i mouse_position ) {
     if ( event->is<sf::Event::MouseButtonPressed>() && inBounds( mouse_position ) ) {
-        ctrl->window->getWindow().close();
+        ctrl->window->close();
     }
 }

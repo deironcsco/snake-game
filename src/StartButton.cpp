@@ -11,13 +11,13 @@ sf::String sb_text{ "START" };
 std::unique_ptr<ButtonParams> sb_params = std::make_unique<ButtonParams>( ButtonParams{
     sb_bg_size,
     sb_text_size,
-    normal_text_size,
+    Style::normal_text_size,
     sb_text,
-    font,
-    button_position,
-    green,
-    black,
-    outline_thickness,
+    Style::font,
+    Style::button_position,
+    Style::green,
+    Style::black,
+    Style::outline_thickness,
 } );
 
 StartButton::StartButton(Control* s_ctrl) : Button( sb_params.get(), s_ctrl) {}

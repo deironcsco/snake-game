@@ -29,16 +29,16 @@ void ObjectRegistry::handleEvent( std::optional<sf::Event> event, sf::Vector2i m
 };
 
 void ObjectRegistry::handleHover( sf::Vector2i mouse_position ) {
-    bool flag{ false }; // can only hover over one thing at a time, right?
+    bool hovering{ false }; // can only hover over one thing at a time, right?. flag == 
     for ( int i{ 0 }; i < objs.size(); i++ ) {
-        flag = objs[i]->handleHover( mouse_position );
-        if ( flag ) {
+        hovering = objs[i]->handleHover( mouse_position );
+        if ( hovering ) {
             break;
         }
     }  
-    if ( !flag && !ctrl->window->getCursorIsArrow() ) {
+    if ( !hovering && ( ctrl->window->getCursor() != sf::Cursor::Type::Arrow ) ) {
         // reset to default if no hover
-        ctrl->window->setCursorArrow( ctrl->window->getWindow() );
+        ctrl->window->setCursor( sf::Cursor::Type::Arrow );
     }
 };
 

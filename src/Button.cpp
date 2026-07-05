@@ -54,7 +54,7 @@ bool Button::inBounds( sf::Vector2i mouse_position ) {
 
 bool Button::handleHover(sf::Vector2i mouse_position) {
     if ( inBounds( mouse_position ) ) { // this->?
-        ctrl->window->setCursorHand( ctrl->window->getWindow() );
+        ctrl->window->setCursor( sf::Cursor::Type::Hand );
         return true;
     }
     return false;

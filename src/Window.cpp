@@ -1,6 +1,7 @@
 #include "../include/Window.h"
 #include <iostream>
 #include "../include/Exception.h"
+#include "../include/ObjectRegistry.h"
 
 Window::Window( unsigned int s_window_grid_size, unsigned int s_window_size_px ) : 
 window_grid_size( s_window_grid_size ),
@@ -18,29 +19,46 @@ window_size_px( s_window_size_px ) {
 };
 
 
+// rw funcs
+bool Window::isOpen() const {
+    return window.isOpen();
+}
+
+std::optional<sf::Event> Window::pollEvent() {
+    return window.pollEvent();
+}
+
+// TODO - all these funcs inline?
+void Window::close() {
+    window.close();
+    return;
+}
+
+void Window::display(ObjectRegistry& obreg) {
+    window.clear();
+    window.draw(obreg);
+    window.display();
+    return;
+}
+
+
 
 // getters
-sf::RenderWindow& Window::getWindow() {
+sf::RenderWindow& Window::getRenderWindow() {
     return window;
 };
 
-// TODO just do get cursor value
-bool Window::getCursorIsArrow() {
-    return cursor_is_arrow;
-};
 
+sf::Cursor::Type Window::getCursor() {
+    return curr_cursor;
+}
 
 
 // setters
-void Window::setCursorArrow( sf::RenderWindow& rw ) {
-    const auto cursor = sf::Cursor::createFromSystem( sf::Cursor::Type::Arrow ).value(); //.value() because optional. have to make a cursor before passing to window
-    rw.setMouseCursor( cursor );
-    cursor_is_arrow = true;
+void Window::setCursor(sf::Cursor::Type c) {
+    const auto cursor = sf::Cursor::createFromSystem( c ).value(); //.value() because optional. have to make a cursor before passing to window
+    window.setMouseCursor( cursor );
+    curr_cursor = c;
 }
 
-void Window::setCursorHand( sf::RenderWindow& rw ) {
-    const auto cursor = sf::Cursor::createFromSystem( sf::Cursor::Type::Hand ).value(); //.value() because optional. have to make a cursor before passing to window
-    rw.setMouseCursor( cursor );
-    cursor_is_arrow = false;
-}
 

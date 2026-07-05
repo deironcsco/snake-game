@@ -18,17 +18,17 @@ int main() {
     // init window
     unsigned int window_size_factor{ 12 }; // no magic values. e.g. 12x12 grid
     unsigned int window_size_px{ 600 }; // 600px x 600px
-    std::unique_ptr<Window> window = std::make_unique<Window>( Window{ window_size_factor, window_size_px } );
-    sf::RenderWindow& rw { window->getWindow() };
+    // std::unique_ptr<Window> window = std::make_unique<Window>( Window{ window_size_factor, window_size_px } );
+    Window window { window_size_factor, window_size_px };
     
     // init game state
     std::unique_ptr<GameState> game_state = std::make_unique<GameState>( GameState{ title_screen } );
 
     // init style
-    initStyle( *window );
+    Style::initStyle( window );
 
     // global control variable
-    Control ctrl = { game_state.get(), window.get() };
+    Control ctrl = { game_state.get(), &window };
 
     // object registry init
     ObjectRegistry obreg{ &ctrl };
@@ -41,14 +41,15 @@ int main() {
     obreg.registerObject( &sb );
     obreg.registerObject( &qb );
 
-    while( rw.isOpen() ) {
-        while( std::optional event = rw.pollEvent() ) {
+    while( window.isOpen() ) {
+        while( std::optional event = window.pollEvent() ) {
             // get mouse functionality
-            sf::Vector2i mouse_position{ sf::Mouse::getPosition( rw ) }; 
+            // std::unique_ptr<Window> wptr = std::make_unique<Window>(window);
+            sf::Vector2i mouse_position{ sf::Mouse::getPosition( window.getRenderWindow() ) }; 
 
             // close functionality
             if ( event->is<sf::Event::Closed>() ) {
-                rw.close();
+                window.close();
             }
             
             // object registry events / hover
@@ -62,9 +63,7 @@ int main() {
         }
 
         // TODO when i turn this into a function, pass obreg by reference b/c i ain't copying all that by value bro
-        rw.clear();
-        rw.draw( obreg );
-        rw.display();
+        window.display( obreg );
     }
     return 0;
 }

@@ -8,7 +8,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include "../include/Window.h"
-#include "../include/StartButtonNew.h"
+// #include "../include/StartButtonNew.h"
 #include "../include/GameState.h"
 #include "../include/Style.h"
 #include <iostream>
@@ -16,13 +16,13 @@
 int main() {
 
     Window w { 12, 600 };
-    sf::RenderWindow& rw = w.getWindow();
+    sf::RenderWindow& rw = w.getRenderWindow();
 
     GameState gs { title_screen };
 
-    Control ctrl {
-        gs, w
-    };
+    // Control ctrl {
+    //     gs, w
+    // };
 
 
     //text test
@@ -67,20 +67,20 @@ int main() {
     std::cout << "t12 30" << tex.getSize().x << ", " << tex.getSize().y << "\n";
 
 
-    ButtonParams* bp { new ButtonParams {
-        { 150, 100 },
-        { 80, 30 },
-        normal_text_size,
-        "START",
-        font,
-        button_position,
-        green,
-        black,
-        outline_thickness,
-        ctrl
-    } };
+    // ButtonParams* bp { new ButtonParams {
+    //     { 150, 100 },
+    //     { 80, 30 },
+    //     normal_text_size,
+    //     "START",
+    //     font,
+    //     button_position,
+    //     green,
+    //     black,
+    //     outline_thickness,
+    //     ctrl
+    // } };
 
-    StartButton sb { bp };
+    // StartButton sb { bp };
 
     while ( rw.isOpen() ) {
         while ( auto event = rw.pollEvent() ) {
@@ -89,11 +89,11 @@ int main() {
             }
         }
         rw.clear();
-        rw.draw( sb );
+        // rw.draw( sb );
         rw.display();
     }
 
-    delete bp;
+    // delete bp;
 
     return 0;
 }

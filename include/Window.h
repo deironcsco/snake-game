@@ -14,7 +14,7 @@ class ObjectRegistry;
 
 class Window {
 private:
-    sf::RenderWindow window; // sfml window instance // TODO change to rw? for consistency
+    sf::RenderWindow window; // sfml window instance
     unsigned int window_grid_size; // grid size e.g. 12x12 grid
     unsigned int window_size_px; // pixel size of window
     int square_size; // pixel size of square
@@ -36,11 +36,7 @@ public:
     sf::Cursor::Type getCursor();
     
     // setters
-    // TODO abstract out and create an enumerated for arrow, hand, etc.
-    // TODO call it setCursorDefault?
     void setCursor(sf::Cursor::Type);
-
-    
 
 };
 

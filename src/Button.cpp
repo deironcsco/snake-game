@@ -52,6 +52,10 @@ bool Button::inBounds( sf::Vector2i mouse_position ) {
     return bnd.inBounds( mouse_position.x, mouse_position.y );
 }
 
+
+
+// Object overrides
+ 
 bool Button::handleHover(sf::Vector2i mouse_position) {
     if ( inBounds( mouse_position ) ) { // this->?
         ctrl->window->setCursor( sf::Cursor::Type::Hand );
@@ -61,7 +65,13 @@ bool Button::handleHover(sf::Vector2i mouse_position) {
 }
 
 GameState Button::getDrawCondition() {
-    return GameState{ title_screen };
+    return GameState::title_screen;
+}
+
+void Button::handleEvent(std::optional<sf::Event> event, sf::Vector2i mouse_position) {
+    if ( event->is<sf::Event::MouseButtonPressed>() && inBounds( mouse_position ) ) {
+        onClick();
+    }
 }
 
 

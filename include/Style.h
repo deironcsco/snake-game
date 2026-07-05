@@ -5,7 +5,6 @@
 #include "Window.h"
 
 // styling and for making components
-// TODO - make it a namespace? so i know where they're coming from?
 
 namespace Style {
 

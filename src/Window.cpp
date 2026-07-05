@@ -28,7 +28,6 @@ std::optional<sf::Event> Window::pollEvent() {
     return window.pollEvent();
 }
 
-// TODO - all these funcs inline?
 void Window::close() {
     window.close();
     return;

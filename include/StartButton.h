@@ -12,7 +12,7 @@ class StartButton : public Button {
 private:
 public:
     StartButton(Control*);
-    void handleEvent( std::optional<sf::Event> event, sf::Vector2i mouse_position ) override;
+    void onClick() override;
 };
 
 

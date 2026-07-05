@@ -14,7 +14,7 @@ private:
 public:
     ObjectRegistry( Control* );
     void draw( sf::RenderTarget& target, sf::RenderStates state ) const override;
-    void registerObject( Object* obj ); // TODO could this be an unpack so i can do multiple at once?
+    void registerObject( Object* obj ); 
     void handleEvent( std::optional<sf::Event> event, sf::Vector2i mouse_position );
     void handleHover( sf::Vector2i mouse_position );
     

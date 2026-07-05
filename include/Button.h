@@ -57,10 +57,13 @@ public:
     // drawable  
     void draw( sf::RenderTarget&, sf::RenderStates ) const override;
 
+    // Object overrides
     bool handleHover(sf::Vector2i mouse_position) override;
     GameState virtual getDrawCondition() override;
-    
-    // DERIVED NEED TO IMPLEMENT Object::handleEvent()
+    void virtual handleEvent(std::optional<sf::Event> event, sf::Vector2i mouse_position) override;
+
+    // virtual
+    void virtual onClick() = 0;
 };
 
 #endif

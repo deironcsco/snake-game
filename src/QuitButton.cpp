@@ -1,23 +1,26 @@
 #include "../include/QuitButton.h"
 
-sf::Vector2f qb_bg_size{ 100, 75 }; // TODO this is global scope and can conflict. should probably namespace components?
-sf::Vector2f qb_text_size { 70, 35 };
-std::unique_ptr<ButtonParams> qb_params = std::make_unique<ButtonParams>(ButtonParams {
-    qb_bg_size,
-    qb_text_size,
-    Style::normal_text_size,
-    "QUIT",
-    Style::font,
-    Style::low_button_position,
-    Style::red,
-    Style::black,
-    Style::outline_thickness,
-});
+namespace QB {
+    sf::Vector2f bg_size{ 100, 75 };
+    sf::Vector2f text_size { 70, 35 };
+    // TODO - does this need to be a pointer? it's a global variable right? with infinite lifetime?
+    // well i probably don't need it copy pasted. it's a big struct
+    // okay, well i can still pass by reference, yeah?
+    std::unique_ptr<ButtonParams> params = std::make_unique<ButtonParams>(ButtonParams {
+        bg_size,
+        text_size,
+        Style::normal_text_size,
+        "QUIT",
+        Style::font,
+        Style::low_button_position,
+        Style::red,
+        Style::black,
+        Style::outline_thickness,
+    });
+}
 
-QuitButton::QuitButton(Control* s_ctrl) : Button( qb_params.get(), s_ctrl ) {};
+QuitButton::QuitButton(Control* s_ctrl) : Button( QB::params.get(), s_ctrl ) {};
 
-void QuitButton::handleEvent( std::optional<sf::Event> event, sf::Vector2i mouse_position ) {
-    if ( event->is<sf::Event::MouseButtonPressed>() && inBounds( mouse_position ) ) {
-        ctrl->window->close();
-    }
+void QuitButton::onClick() {
+    ctrl->window->close();
 }

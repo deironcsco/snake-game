@@ -22,13 +22,14 @@ int main() {
     Window window { window_size_factor, window_size_px };
     
     // init game state
-    std::unique_ptr<GameState> game_state = std::make_unique<GameState>( GameState{ title_screen } );
+    // std::unique_ptr<GameState> game_state = std::make_unique<GameState>( GameState{ title_screen } );
+    GameState game_state { GameState::title_screen };
 
     // init style
     Style::initStyle( window );
 
     // global control variable
-    Control ctrl = { game_state.get(), &window };
+    Control ctrl = { &game_state, &window };
 
     // object registry init
     ObjectRegistry obreg{ &ctrl };
@@ -44,7 +45,6 @@ int main() {
     while( window.isOpen() ) {
         while( std::optional event = window.pollEvent() ) {
             // get mouse functionality
-            // std::unique_ptr<Window> wptr = std::make_unique<Window>(window);
             sf::Vector2i mouse_position{ sf::Mouse::getPosition( window.getRenderWindow() ) }; 
 
             // close functionality
@@ -58,11 +58,10 @@ int main() {
 
             // test gamestate
             if ( event->is<sf::Event::MouseButtonPressed>() ) {
-                std::cout << "gs " << *(ctrl.game_state) << "\n";
+                std::cout << "gs " << static_cast<std::underlying_type<GameState>::type>(*(ctrl.game_state)) << "\n";
             }
         }
 
-        // TODO when i turn this into a function, pass obreg by reference b/c i ain't copying all that by value bro
         window.display( obreg );
     }
     return 0;

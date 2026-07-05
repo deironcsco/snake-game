@@ -12,6 +12,7 @@
 #include "../include/Control.h"
 #include "../include/QuitButton.h"
 #include "../include/ObjectRegistry.h"
+#include "../include/Title.h"
 
 
 int main() {
@@ -35,10 +36,12 @@ int main() {
     // components
     StartButton sb{ ctrl };
     QuitButton qb{ ctrl };
+    Title title{};
 
     // register components to obreg
     obreg.registerObject( &sb );
     obreg.registerObject( &qb );
+    obreg.registerObject( &title );
 
     while( window.isOpen() ) {
         // event handling
@@ -63,6 +66,10 @@ int main() {
 
         // display
         window.display( obreg );
+        // window.getRenderWindow().clear();
+        // window.getRenderWindow().draw(  );
+        // window.getRenderWindow().draw( obreg );
+        // window.getRenderWindow().display();
     }
     return 0;
 }

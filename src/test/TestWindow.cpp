@@ -35,7 +35,7 @@ void TestWindow_ShouldInstantiateWhenInputsArePositive() {
 
     // assert window size
     // TODO should print what the size is
-    sf::Vector2u v { w.getWindow().getSize() };
+    sf::Vector2u v { w.getRenderWindow().getSize() };
     if ( v.x != 600 ) {
         std::cout << "\tFAIL Window WindowSize x is incorrect!\n";
         return;

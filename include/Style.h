@@ -5,27 +5,33 @@
 #include "Window.h"
 
 // styling and for making components
-// TODO - make it a namespace? so i know where they're coming from?
 
-// colors
-inline sf::Color green{ 30, 170, 0 };
-inline sf::Color black{ 0, 0, 0 };
+namespace Style {
 
-// positions
-inline sf::Vector2f button_position{ 300, 400 };
+    // colors
+    inline sf::Color green{ 30, 170, 0 };
+    inline sf::Color black{ 0, 0, 0 };
+    inline sf::Color red{ 200, 0, 0 };
 
-// outline thickness for shapes
-inline float outline_thickness;
+    // positions
+    inline sf::Vector2f button_position{ 300, 400 };
+    inline sf::Vector2f low_button_position{ 300, 500 };
 
-// shapes
-inline const sf::Font font( "CaviarDreams.ttf" );
+    // outline thickness for shapes
+    inline float outline_thickness;
 
-// text size
-inline unsigned int normal_text_size{ 30 };
+    // shapes
+    inline const sf::Font font( "CaviarDreams.ttf" );
 
-// since outline thickness is dependent on the grid size of the window
-inline void initStyle( Window& window ) {
-    outline_thickness = -window.getSquareSize<float>() / 10;
+    // text size
+    inline unsigned int normal_text_size{ 30 };
+
+    // since outline thickness is dependent on the grid size of the window
+    // this will be called in main (or wherever) after window gets instantiated
+    inline void initStyle( Window& window ) {
+        outline_thickness = -window.getSquareSize<float>() / 10;
+    }
+
 }
 
 #endif

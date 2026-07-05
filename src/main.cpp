@@ -1,62 +1,68 @@
 #include <iostream>
+
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include <memory>
+
 #include "../include/Window.h"
 #include "../include/Style.h"
 #include "../include/StartButton.h"
 #include "../include/GameState.h"
+#include "../include/Button.h"
+#include "../include/Control.h"
+#include "../include/QuitButton.h"
+#include "../include/ObjectRegistry.h"
 
 
 int main() {
-
     // init window
     unsigned int window_size_factor{ 12 }; // no magic values. e.g. 12x12 grid
     unsigned int window_size_px{ 600 }; // 600px x 600px
     Window window{ window_size_factor, window_size_px };
-    sf::RenderWindow& rw = window.getWindow();
     
     // init game state
-    GameState gs = title_screen;
-    
+    GameState game_state{ GameState::title_screen };
+
     // init style
-    initStyle( window );
-    
-    // create a start button
-    StartButton sb = StartButton();
+    Style::initStyle( window );
 
-    while( rw.isOpen() ) {
-        while( std::optional event = rw.pollEvent() ) {
-            // get mouse functionality
-            int x{ sf::Mouse::getPosition(rw).x };
-            int y{ sf::Mouse::getPosition(rw).y };
+    // global control variable
+    Control ctrl = { &game_state, &window };
 
-            // close functionality
+    // object registry init
+    ObjectRegistry obreg{ &ctrl };
+
+    // components
+    StartButton sb{ ctrl };
+    QuitButton qb{ ctrl };
+
+    // register components to obreg
+    obreg.registerObject( &sb );
+    obreg.registerObject( &qb );
+
+    while( window.isOpen() ) {
+        // event handling
+        while( std::optional event = window.pollEvent() ) {
+            // get mouse
+            sf::Vector2i mouse_position{ sf::Mouse::getPosition( window.getRenderWindow() ) }; 
+
+            // close
             if ( event->is<sf::Event::Closed>() ) {
-                rw.close();
-            }
-
-            // button functionality to start button
-            if (event->is<sf::Event::MouseButtonPressed>()) {
-                if (sb.inBounds( x, y )) {
-                    sb.onClick( gs );
-                }
-                std::cout << "gs: " << gs << "\n";
+                window.close();
             }
             
-            // cursor
-            if ( sb.inBounds( x, y ) ) {
-                window.setCursorHand( rw );
-            }
-            // back to normal if not hovering
-            else if ( !window.getCursorIsArrow() ) {
-                window.setCursorArrow( rw );
+            // object registry events / hover
+            obreg.handleEvent( event, mouse_position );
+            obreg.handleHover( mouse_position );
+
+            // test gamestate
+            if ( event->is<sf::Event::MouseButtonPressed>() ) {
+                std::cout << "gs " << static_cast<std::underlying_type<GameState>::type>(*(ctrl.game_state)) << "\n";
             }
         }
 
-        // TODO turn this into a function
-        rw.clear();
-        rw.draw( sb );
-        rw.display();
+        // display
+        window.display( obreg );
     }
     return 0;
 }

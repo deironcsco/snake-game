@@ -1,0 +1,75 @@
+#include "Button.h"
+
+// constructor
+Button::Button( ButtonParams& bp, Control* ctrl ) : 
+    background_size( bp.background_size ),
+    background( bp.background_size ),
+    text_size( bp.text_size ),
+    text( bp.font, bp.text, bp.font_size ),
+    bnd( {
+        bp.position.x + bp.background_size.x / 2,
+        bp.position.x - bp.background_size.x / 2,
+        bp.position.y + bp.background_size.y / 2,
+        bp.position.y - bp.background_size.y / 2,
+    } ),
+    ctrl( ctrl )
+{
+    // bg init
+    background.setFillColor( bp.background_color );
+    background.setOutlineColor( bp.outline_color );
+    background.setOutlineThickness( bp.outline_thickness );
+    background.setOrigin( { bp.background_size.x / 2, bp.background_size.y / 2 } ); // half of its dimensions
+    background.setPosition( bp.position );
+
+    // text init
+    text.setOrigin( { bp.text_size.x / 2, bp.text_size.y / 2 } );
+    text.setPosition( bp.position );
+};
+
+// wrapper for Bounds::inBounds
+bool Button::inBounds( sf::Vector2i mouse_position ) {
+    return bnd.inBounds( mouse_position.x, mouse_position.y );
+}
+
+
+
+
+// Drawable override
+
+void Button::draw( sf::RenderTarget& target, sf::RenderStates states ) const {
+    target.draw( background, states );
+    target.draw( text, states );
+}
+
+
+// Object overrides
+ 
+bool Button::handleHover(sf::Vector2i mouse_position) {
+    if ( inBounds( mouse_position ) ) {
+        ctrl->window->setCursor( sf::Cursor::Type::Hand );
+        return true;
+    }
+    return false;
+}
+
+GameState Button::getDrawCondition() {
+    return GameState::title_screen;
+}
+
+void Button::handleEvent(std::optional<sf::Event> event, sf::Vector2i mouse_position) {
+    if ( event->is<sf::Event::MouseButtonPressed>() && inBounds( mouse_position ) ) {
+        onClick();
+    }
+}
+
+
+
+// getters
+
+sf::RectangleShape& Button::getBg() {
+    return background;
+}
+
+sf::Text& Button::getText() {
+    return text;
+}

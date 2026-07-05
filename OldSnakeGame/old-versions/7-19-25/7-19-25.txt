@@ -1,0 +1,4 @@
+added trophy room. it's not functionally integrated or anything
+you just have to turn trophy_room bool true
+
+cs 7-19-25 709pm

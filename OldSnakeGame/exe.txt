@@ -1,0 +1,2 @@
+i changed all the .exes to old-(name).exe and moved them to SG/bin
+-cs 6/10/26 130pm

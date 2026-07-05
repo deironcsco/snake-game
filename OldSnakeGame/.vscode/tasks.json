@@ -1,0 +1,90 @@
+//g++ main.cpp -IC:\Users\conno\Downloads\Programming\Tools\SFML-3.0.0-windows-gcc-14.2.0-mingw-64-bit\SFML-3.0.0\include 
+//-LC:\Users\conno\Downloads\Programming\Tools\SFML-3.0.0-windows-gcc-14.2.0-mingw-64-bit\SFML-3.0.0\bin -lsfml-graphics -lsfml-window -lsfml-system -o main.exe
+
+
+// command for test.cpp
+//g++ test.cpp -IC:\Users\conno\Downloads\Programming\Tools\SFML-3.0.0-windows-gcc-14.2.0-mingw-64-bit\SFML-3.0.0\include 
+//-LC:\Users\conno\Downloads\Programming\Tools\SFML-3.0.0-windows-gcc-14.2.0-mingw-64-bit\SFML-3.0.0\lib -lsfml-graphics -lsfml-system -lsfml-window -o test.exe
+
+
+
+// command for main.cpp
+//g++ main.cpp -IC:\Users\conno\Downloads\Programming\Tools\SFML-3.0.0-windows-gcc-14.2.0-mingw-64-bit\SFML-3.0.0\include 
+//-LC:\Users\conno\Downloads\Programming\Tools\SFML-3.0.0-windows-gcc-14.2.0-mingw-64-bit\SFML-3.0.0\lib -lsfml-graphics -lsfml-system -lsfml-window -o main.exe
+
+// configuring the default build task is ctrl shift p -> edit default build task 
+// 'main build and run' is for the gui
+// 'test build and run' is for my alternate structure
+
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "main build and run",
+            "type": "shell",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "main build",
+                "main run"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "main build",
+            "type": "cppbuild",
+            "command": "g++",
+            "args": [
+                "main.cpp",
+                "-g",
+                "-IC:\\Users\\conno\\SFML-3.0.0\\include",
+                "-LC:\\Users\\conno\\SFML-3.0.0\\lib",
+                "-lsfml-graphics",
+                "-lsfml-system",
+                "-lsfml-window",
+                "-o",
+                "main.exe"
+            ]
+        },
+        {
+            "label": "main run",
+            "type": "shell",
+            "command": "./main.exe"
+        },
+        {
+            "label": "test build and run",
+            "type": "shell",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "test build",
+                "test run"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "test build",
+            "type": "cppbuild",
+            "command": "g++",
+            "args": [
+                "test_button.cpp",
+                "-g",
+                "-IC:\\Users\\conno\\SFML-3.0.0\\include",
+                "-LC:\\Users\\conno\\SFML-3.0.0\\lib",
+                "-lsfml-graphics",
+                "-lsfml-system",
+                "-lsfml-window",
+                "-o",
+                "tb.exe"
+            ]
+        },
+        {
+            "label": "test run",
+            "type": "shell",
+            "command": "./tb.exe"
+        }
+    ]
+}

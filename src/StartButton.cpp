@@ -1,8 +1,8 @@
-#include "../include/StartButton.h"
-
 #include <memory>
 
-// no magic values
+#include "../include/StartButton.h"
+
+// SB params
 namespace SB {
     // gonna copy paste this todo from SB private member vars. i'm not really satisifed with where this should go
 
@@ -13,10 +13,12 @@ namespace SB {
     // changing bg size doesn't actually do anything in the SB, b/c it was set when it was constructed
     // i think the namespaced params are a bit better. perhaps
 
+    // no magic values
     sf::Vector2f bg_size{ 150, 100 };
     sf::Vector2f text_size{ 80, 30 };
     sf::String text{ "START" };
 
+    // params pointer
     std::unique_ptr<ButtonParams> params = std::make_unique<ButtonParams>( ButtonParams{
         bg_size,
         text_size,
@@ -24,14 +26,16 @@ namespace SB {
         text,
         Style::font,
         Style::button_position,
-        Style::green,
+        Style::green, // TODO - no magic value these?
         Style::black,
         Style::outline_thickness,
     } );
 }
 
-StartButton::StartButton(Control* s_ctrl) : Button( SB::params.get(), s_ctrl) {}
+// constructor
+StartButton::StartButton( Control& s_ctrl ) : Button( *SB::params, &s_ctrl) {}
 
+// change game state on click
 void StartButton::onClick() {
-    *(ctrl->game_state) = GameState::start_game;
+    *( ctrl->game_state ) = GameState::start_game;
 }

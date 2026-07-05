@@ -5,8 +5,8 @@
 // e.g. are you in the title screen, or are you playing, etc.
 
 enum class GameState {
-    title_screen, // before game start
-    start_game // game started
+    title_screen,   // before game start
+    start_game      // game started
 };
 
 #endif

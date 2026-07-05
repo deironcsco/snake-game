@@ -4,14 +4,15 @@
 #include "GameState.h"
 #include "Window.h"
 
-// Control is because idk how to make whatever argument list you want for
-// ...virtual function onClick (now handleEvent), so we just putting all game info here so 
-// ...if the buttons need it they can have it all as one struct. yeah?
+// Control bundles important info that originally I needed for
+// virtual functions like onClick that couldn't have different 
+// parameters 
+
 struct Control {
     GameState* game_state;
     Window* window;
 };
-// they need to be pointers and not references b/c they have to be nullable
+// they need to be pointers and not references b/c they should be nullable
 
 
 #endif

@@ -3,6 +3,7 @@
 #include "../include/Exception.h"
 #include "../include/ObjectRegistry.h"
 
+// constructor
 Window::Window( unsigned int s_window_grid_size, unsigned int s_window_size_px ) : 
 window_grid_size( s_window_grid_size ),
 window_size_px( s_window_size_px ) { 
@@ -33,9 +34,9 @@ void Window::close() {
     return;
 }
 
-void Window::display(ObjectRegistry& obreg) {
+void Window::display( ObjectRegistry& obreg ) {
     window.clear();
-    window.draw(obreg);
+    window.draw( obreg );
     window.display();
     return;
 }
@@ -54,7 +55,7 @@ sf::Cursor::Type Window::getCursor() {
 
 
 // setters
-void Window::setCursor(sf::Cursor::Type c) {
+void Window::setCursor( sf::Cursor::Type c ) {
     const auto cursor = sf::Cursor::createFromSystem( c ).value(); //.value() because optional. have to make a cursor before passing to window
     window.setMouseCursor( cursor );
     curr_cursor = c;

@@ -4,13 +4,10 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
-// #include "ObjectRegistry.h"
-
 // Window object to group some non-game logic / setup
 // e.g. size of window, changing cursor 
 
-class ObjectRegistry;
-
+class ObjectRegistry; // forward declare to prevent circular definitions
 
 class Window {
 private:
@@ -18,12 +15,12 @@ private:
     unsigned int window_grid_size; // grid size e.g. 12x12 grid
     unsigned int window_size_px; // pixel size of window
     int square_size; // pixel size of square
-    sf::Cursor::Type curr_cursor;
+    sf::Cursor::Type curr_cursor; // what the current cursor is
 public:
     Window( unsigned int, unsigned int ); // constructor
 
-    // rw funcs
-    bool isOpen() const; // isOpen is const so...
+    // rw func wrappers
+    bool isOpen() const;
     std::optional<sf::Event> pollEvent();
     void close();
     void display(ObjectRegistry&); // rw.clear, rw.draw, then rw.display

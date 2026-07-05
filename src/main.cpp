@@ -18,12 +18,10 @@ int main() {
     // init window
     unsigned int window_size_factor{ 12 }; // no magic values. e.g. 12x12 grid
     unsigned int window_size_px{ 600 }; // 600px x 600px
-    // std::unique_ptr<Window> window = std::make_unique<Window>( Window{ window_size_factor, window_size_px } );
-    Window window { window_size_factor, window_size_px };
+    Window window{ window_size_factor, window_size_px };
     
     // init game state
-    // std::unique_ptr<GameState> game_state = std::make_unique<GameState>( GameState{ title_screen } );
-    GameState game_state { GameState::title_screen };
+    GameState game_state{ GameState::title_screen };
 
     // init style
     Style::initStyle( window );
@@ -35,19 +33,20 @@ int main() {
     ObjectRegistry obreg{ &ctrl };
 
     // components
-    StartButton sb{ &ctrl };
-    QuitButton qb{ &ctrl };
+    StartButton sb{ ctrl };
+    QuitButton qb{ ctrl };
 
     // register components to obreg
     obreg.registerObject( &sb );
     obreg.registerObject( &qb );
 
     while( window.isOpen() ) {
+        // event handling
         while( std::optional event = window.pollEvent() ) {
-            // get mouse functionality
+            // get mouse
             sf::Vector2i mouse_position{ sf::Mouse::getPosition( window.getRenderWindow() ) }; 
 
-            // close functionality
+            // close
             if ( event->is<sf::Event::Closed>() ) {
                 window.close();
             }
@@ -62,6 +61,7 @@ int main() {
             }
         }
 
+        // display
         window.display( obreg );
     }
     return 0;

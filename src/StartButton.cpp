@@ -18,10 +18,9 @@ std::unique_ptr<ButtonParams> sb_params = std::make_unique<ButtonParams>( Button
     green,
     black,
     outline_thickness,
-    &g_ctrl // TODO should this be a pointer? or does it not matter...
 } );
 
-StartButton::StartButton() : Button( sb_params.get() ) {}
+StartButton::StartButton(Control* s_ctrl) : Button( sb_params.get(), s_ctrl) {}
 
 void StartButton::handleEvent( std::optional<sf::Event> event, sf::Vector2i mouse_position ) {
     if ( event->is<sf::Event::MouseButtonPressed>() && inBounds( mouse_position ) ) {

@@ -12,10 +12,9 @@ std::unique_ptr<ButtonParams> qb_params = std::make_unique<ButtonParams>(ButtonP
     red,
     black,
     outline_thickness,
-    &g_ctrl
 });
 
-QuitButton::QuitButton() : Button( qb_params.get() ) {};
+QuitButton::QuitButton(Control* s_ctrl) : Button( qb_params.get(), s_ctrl ) {};
 
 void QuitButton::handleEvent( std::optional<sf::Event> event, sf::Vector2i mouse_position ) {
     if ( event->is<sf::Event::MouseButtonPressed>() && inBounds( mouse_position ) ) {

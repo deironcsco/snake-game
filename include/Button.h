@@ -28,7 +28,6 @@ public:
     sf::Color background_color;
     sf::Color outline_color;
     float outline_thickness;
-    Control* ctrl; 
 };
 
 class Button : public Object {
@@ -48,7 +47,7 @@ protected:
     Control* ctrl;
 
 public:
-    Button( ButtonParams* ); // constructor
+    Button( ButtonParams*, Control* ); // constructor
     bool inBounds( sf::Vector2i ); // is in bounds, calls Bound::inBounds()
     
     // getters 

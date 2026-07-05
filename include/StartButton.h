@@ -11,7 +11,7 @@ extern std::unique_ptr<ButtonParams> sb_params;
 class StartButton : public Button {
 private:
 public:
-    StartButton();
+    StartButton(Control*);
     void handleEvent( std::optional<sf::Event> event, sf::Vector2i mouse_position ) override;
 };
 

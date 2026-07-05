@@ -11,7 +11,7 @@ extern std::unique_ptr<ButtonParams> qb_params;
 class QuitButton : public Button {
 private:
 public:
-    QuitButton();
+    QuitButton(Control*);
     void handleEvent( std::optional<sf::Event> event, sf::Vector2i mouse_position ) override;
 };
 

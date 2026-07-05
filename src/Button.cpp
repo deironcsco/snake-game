@@ -1,7 +1,7 @@
 #include "Button.h"
 
 // constructor
-Button::Button( ButtonParams* bp ) : 
+Button::Button( ButtonParams* bp, Control* ctrl ) : 
     background_size( bp->background_size ),
     background( bp->background_size ),
     text_size( bp->text_size ),
@@ -12,7 +12,7 @@ Button::Button( ButtonParams* bp ) :
         bp->position.y + bp->background_size.y / 2,
         bp->position.y - bp->background_size.y / 2,
     } ),
-    ctrl( bp->ctrl )
+    ctrl( ctrl )
 {
     // bg init
     background.setFillColor( bp->background_color );

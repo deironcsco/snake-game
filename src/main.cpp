@@ -27,17 +27,18 @@ int main() {
     // init style
     initStyle( *window );
 
-    // init global control struct
-    g_ctrl.game_state = game_state.get();
-    g_ctrl.window = window.get();
-    // Control ctrl = { gs.get(), window.get() };
+    // global control variable
+    Control ctrl = { game_state.get(), window.get() };
 
-    ObjectRegistry obreg{ &g_ctrl };
+    // object registry init
+    ObjectRegistry obreg{ &ctrl };
 
-    StartButton sb{};
-    QuitButton qb{};
+    // components
+    StartButton sb{ &ctrl };
+    QuitButton qb{ &ctrl };
 
-    obreg.registerObject( &sb ); // TODO should sb and qb be unique_ptrs and not references? does it not matter?
+    // register components to obreg
+    obreg.registerObject( &sb );
     obreg.registerObject( &qb );
 
     while( rw.isOpen() ) {
@@ -50,12 +51,13 @@ int main() {
                 rw.close();
             }
             
+            // object registry events / hover
             obreg.handleEvent( event, mouse_position );
             obreg.handleHover( mouse_position );
 
             // test gamestate
             if ( event->is<sf::Event::MouseButtonPressed>() ) {
-                std::cout << "gs " << *(g_ctrl.game_state) << "\n";
+                std::cout << "gs " << *(ctrl.game_state) << "\n";
             }
         }
 

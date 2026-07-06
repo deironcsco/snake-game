@@ -7,9 +7,6 @@ namespace QB {
     sf::Vector2f text_size { 70, 35 };
 
     // params pointer
-    // TODO - does this need to be a pointer? it's a global variable right? with infinite lifetime?
-    // well i probably don't need it copy pasted. it's a big struct
-    // okay, well i can still pass by reference, yeah?
     std::unique_ptr<ButtonParams> params = std::make_unique<ButtonParams>(ButtonParams {
         bg_size,
         text_size,

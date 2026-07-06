@@ -11,7 +11,9 @@ void ObjectRegistry::registerObject( Object* obj ) {
 // loop through Object::handleEvents
 void ObjectRegistry::handleEvent( std::optional<sf::Event> event, sf::Vector2i mouse_position ) {
     for ( int i{ 0 }; i < objs.size(); i++ ) {
-        objs[i]->handleEvent( event, mouse_position );
+        if ( *( ctrl->game_state ) == objs[i]->getDrawCondition() ) {
+            objs[i]->handleEvent( event, mouse_position );
+        }
     }
 };
 
@@ -19,9 +21,11 @@ void ObjectRegistry::handleEvent( std::optional<sf::Event> event, sf::Vector2i m
 void ObjectRegistry::handleHover( sf::Vector2i mouse_position ) {
     bool hovering{ false }; // can only hover over one thing at a time, right?. flag == 
     for ( int i{ 0 }; i < objs.size(); i++ ) {
-        hovering = objs[i]->handleHover( mouse_position );
-        if ( hovering ) {
-            break;
+        if ( *( ctrl->game_state ) == objs[i]->getDrawCondition() ) {
+            hovering = objs[i]->handleHover( mouse_position );
+            if ( hovering ) {
+                break;
+            }
         }
     }  
     if ( !hovering && ( ctrl->window->getCursor() != sf::Cursor::Type::Arrow ) ) {

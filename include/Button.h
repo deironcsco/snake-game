@@ -15,7 +15,7 @@
 #include "Window.h"
 #include "Object.h"
 
-// Button component
+// Button object
 
 // params to pass into buttons
 struct ButtonParams {

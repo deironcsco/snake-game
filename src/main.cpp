@@ -13,6 +13,7 @@
 #include "../include/QuitButton.h"
 #include "../include/ObjectRegistry.h"
 #include "../include/Title.h"
+#include "../include/Instructions.h"
 
 
 int main() {
@@ -37,11 +38,13 @@ int main() {
     StartButton sb{ ctrl };
     QuitButton qb{ ctrl };
     Title title{};
+    Instructions instructions{};
 
     // register components to obreg
     obreg.registerObject( &sb );
     obreg.registerObject( &qb );
     obreg.registerObject( &title );
+    obreg.registerObject( &instructions );
 
     while( window.isOpen() ) {
         // event handling
@@ -60,16 +63,12 @@ int main() {
 
             // test gamestate
             if ( event->is<sf::Event::MouseButtonPressed>() ) {
-                std::cout << "gs " << static_cast<std::underlying_type<GameState>::type>(*(ctrl.game_state)) << "\n";
+                std::cout << "gs " << static_cast<std::underlying_type<GameState>::type>( *( ctrl.game_state ) ) << "\n";
             }
         }
 
         // display
         window.display( obreg );
-        // window.getRenderWindow().clear();
-        // window.getRenderWindow().draw(  );
-        // window.getRenderWindow().draw( obreg );
-        // window.getRenderWindow().display();
     }
     return 0;
 }

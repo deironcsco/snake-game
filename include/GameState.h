@@ -6,7 +6,8 @@
 
 enum class GameState {
     title_screen,   // before game start
-    start_game      // game started
+    start_game,     // game started
+    game_over       // snake died
 };
 
 #endif

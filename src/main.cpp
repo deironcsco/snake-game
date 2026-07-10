@@ -92,7 +92,7 @@ int main() {
     //TODO is there a better way to structure it so handleHover is only covered if it's a hoverable object?
         // object >> hoverable >> button? or something?
     //TODO is it possible to disable mouse during start_game
-
+    //TODO old snake gaem doesn't work anymore, need to change file paths to point to OSG/picss
 
 
 

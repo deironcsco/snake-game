@@ -5,6 +5,7 @@
 #include <queue>
 
 #include "Object.h"
+#include "Window.h"
 
 enum class Direction {
     UP, DOWN, LEFT, RIGHT
@@ -12,21 +13,26 @@ enum class Direction {
 
 class Snake : public Object {
 private:
-    Direction dir;
+    Direction direction{ Direction::UP };
     std::vector<sf::RectangleShape> snake;
+    Window& window;
     unsigned int window_ubound;
     unsigned int window_lbound; // TODO - combine these into a struct?
     sf::Clock clock;
-    std::queue<Direction> dir_queue;
+    std::queue<Direction> direction_queue{};
+    bool just_got_body{ false };
+    GameState& game_state;
+    sf::Vector2f center_position_game;
 public:
-    Snake(unsigned int, unsigned int);
+    Snake(Window&, GameState&);
     void handleEvent( std::optional<sf::Event> event, sf::Vector2i mouse_position ) override;
-    void move(Direction);
-    void handleDirection(std::optional<sf::Event>);
+    void move();
+    void handleDirection(sf::Keyboard::Key);
     void draw(sf::RenderTarget&, sf::RenderStates) const override;
     void reInitPosition();
     void play();
-    bool isOccupiedBySnake();
+    bool isOccupiedBySnake(float x, float y, bool exceptFirst);
+    void MoveSnake(float x, float y);
 };
 
 #endif

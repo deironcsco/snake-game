@@ -31,6 +31,8 @@ public:
         return (T)square_size;
     }
     sf::Cursor::Type getCursor();
+    unsigned int getWindowGridSize();
+    unsigned int getWindowSizePx();
     
     // setters
     void setCursor(sf::Cursor::Type);

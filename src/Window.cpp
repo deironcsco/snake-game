@@ -53,6 +53,14 @@ sf::Cursor::Type Window::getCursor() {
     return curr_cursor;
 }
 
+unsigned int Window::getWindowGridSize() {
+    return window_grid_size;
+}
+
+unsigned int Window::getWindowSizePx() {
+    return window_size_px;
+}
+
 
 // setters
 void Window::setCursor( sf::Cursor::Type c ) {

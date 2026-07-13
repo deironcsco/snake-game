@@ -81,8 +81,6 @@ int main() {
     std::string direction{ "up" };
     std::queue<std::string> direction_queue{};
 
-    //TODO make sure clock and direction events are in there too
-
     int l_bound{isquare_size / 2};
     unsigned int u_bound{ window_size_px - isquare_size/2 }; // narrowing conversion./ni
 
@@ -138,7 +136,6 @@ int main() {
 
             if (game_state == GameState::title_screen) {
                 if ( event->is<sf::Event::MouseButtonPressed>() && sb.inBounds( mouse_position ) ) {
-                    std::cout << "SB CLICK\n";
                     //reinitialize snake, delete all but head
                     int size = snake.size(); //if snake.size() in for condition, it's constantly decreasing
                     for (int i{ 0 }; i < (size-1); i++) {

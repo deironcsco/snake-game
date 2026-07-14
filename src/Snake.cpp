@@ -2,6 +2,7 @@
 #include "../include/Style.h"
 
 #include <cmath>
+#include <iostream>
 
 namespace SnakeParams {
 
@@ -37,16 +38,21 @@ Snake::Snake( Window& s_window, GameState& s_gs ) :
 }
 
 void Snake::handleEvent( std::optional<sf::Event> event, sf::Vector2i mouse_position ) {
+    std::cout << "Snake::handleEvent() start\n";
     if ( event->is<sf::Event::KeyPressed>() ) {
+        std::cout << "Snake::handleEvent() handleDirection start\n";
         handleDirection( event->getIf<sf::Event::KeyPressed>()->code );
-        move();
+        std::cout << "Snake::handleEvent() handleDirection end\n";
     }
+    move();
+    std::cout << "Snake::handleEvent() end\n";
     return;
 }
 
 void Snake::move() {
     // should also only move if gs is start game
     int isquare_size{ window.getSquareSize<int>() };
+    std::cout << "Snake::move() curr time: " << clock.getElapsedTime().asSeconds() << "\n";
     sf::Time curr{ clock.getElapsedTime() };
     if (curr.asSeconds() >= 0.3) {  //.2
         //dequeueing direction
@@ -82,11 +88,23 @@ void Snake::move() {
             direction_queue.pop(); //pop regardless
         }
         
+        //print direction
+        std::cout << "Snake::move() direction: " << static_cast<std::underlying_type<GameState>::type>( direction ) << "\n";
+        // print dir queue
+        if (!direction_queue.empty()) {
+            std::cout << "Snake::move() dir queue front: " << static_cast<std::underlying_type<GameState>::type>( direction_queue.front() ) << "\n";
+            std::cout << "Snake::move() dir queue size: " << static_cast<std::underlying_type<GameState>::type>( direction_queue.size() ) << "\n";
+            std::cout << "Snake::move() dir queue back: " << static_cast<std::underlying_type<GameState>::type>( direction_queue.back() ) << "\n";
+        } else {
+            std::cout << "Snake::move() dir queue: empty!\n";
+        }
+        
         //move snake and game over testing
         if (direction == Direction::UP) {
             if (snake[0].getPosition().y == window_lbound || 
             isOccupiedBySnake(snake[0].getPosition().x, snake[0].getPosition().y-isquare_size, true)) {
                 game_state = GameState::title_screen;
+                reInitPosition();
             }
             else {
                 MoveSnake(0, -isquare_size);
@@ -98,6 +116,7 @@ void Snake::move() {
             if (snake[0].getPosition().x == window_ubound || 
             isOccupiedBySnake(snake[0].getPosition().x+isquare_size, snake[0].getPosition().y, true)) {
                 game_state = GameState::title_screen;
+                reInitPosition();
             }
             else {
                 MoveSnake(isquare_size, 0);
@@ -108,6 +127,7 @@ void Snake::move() {
             if (snake[0].getPosition().x == window_lbound || 
             isOccupiedBySnake(snake[0].getPosition().x-isquare_size, snake[0].getPosition().y, true)) {
                 game_state = GameState::title_screen;
+                reInitPosition();
             }
             else {
                 MoveSnake(-isquare_size, 0);
@@ -118,6 +138,7 @@ void Snake::move() {
             if (snake[0].getPosition().y == window_ubound || 
             isOccupiedBySnake(snake[0].getPosition().x, snake[0].getPosition().y+isquare_size, true)) {
                 game_state = GameState::title_screen;
+                reInitPosition();
             }
             else {
                 MoveSnake(0, isquare_size);
@@ -126,6 +147,7 @@ void Snake::move() {
         
         clock.restart();
     }
+    std::cout << "Snake::move(): end\n";
 }
 
 void Snake::handleDirection(sf::Keyboard::Key key) {
@@ -265,4 +287,8 @@ void Snake::MoveSnake( float x, float y) {
         y = prevy; //^^ for y
     }
     return;
+}
+
+GameState Snake::getDrawCondition() {
+    return GameState::start_game;
 }

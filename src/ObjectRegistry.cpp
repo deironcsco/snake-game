@@ -1,5 +1,7 @@
 #include "ObjectRegistry.h"
 
+#include <iostream>
+
 // constructor
 ObjectRegistry::ObjectRegistry( Control* s_ctrl ) : ctrl( s_ctrl ) {};
 
@@ -10,6 +12,7 @@ void ObjectRegistry::registerObject( Object* obj ) {
 
 // loop through Object::handleEvents
 void ObjectRegistry::handleEvent( std::optional<sf::Event> event, sf::Vector2i mouse_position ) {
+    std::cout << "ObjectRegistry::handleEvent()\n";
     for ( int i{ 0 }; i < objs.size(); i++ ) {
         if ( *( ctrl->game_state ) == objs[i]->getDrawCondition() ) {
             objs[i]->handleEvent( event, mouse_position );
@@ -28,7 +31,7 @@ void ObjectRegistry::handleHover( sf::Vector2i mouse_position ) {
             }
         }
     }  
-    if ( !hovering && ( ctrl->window->getCursor() != sf::Cursor::Type::Arrow ) ) {
+    if ( !hovering && ( ctrl->window->getCursor() != sf::Cursor::Type::Arrow ) ) { // TODO switch these conditions?
         // reset to default if no hover
         ctrl->window->setCursor( sf::Cursor::Type::Arrow );
     }

@@ -5,7 +5,7 @@ source ./vars.sh
 SRC_ROOT="${PROJECT_ROOT}/src"
 PROJECT_SOURCE="${SRC_ROOT}/ObjectRegistry.cpp ${SRC_ROOT}/Window.cpp ${SRC_ROOT}/Button.cpp \
 ${SRC_ROOT}/StartButton.cpp ${SRC_ROOT}/QuitButton.cpp ${SRC_ROOT}/Text.cpp ${SRC_ROOT}/Title.cpp \
-${SRC_ROOT}/Instructions.cpp"
+${SRC_ROOT}/Instructions.cpp ${SRC_ROOT}/Object.cpp ${SRC_ROOT}/Snake.cpp"
 PROJECT_INCLUDE="-I${PROJECT_ROOT}/include"
 MAIN_FILE="${PROJECT_ROOT}/src/main.cpp"
 

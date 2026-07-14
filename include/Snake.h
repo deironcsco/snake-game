@@ -33,6 +33,7 @@ public:
     void play();
     bool isOccupiedBySnake(float x, float y, bool exceptFirst);
     void MoveSnake(float x, float y);
+    GameState getDrawCondition() override;
 };
 
 #endif

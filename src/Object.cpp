@@ -7,3 +7,7 @@ void Object::handleEvent( std::optional<sf::Event> event, sf::Vector2i mouse_pos
 bool Object::handleHover( sf::Vector2i mouse_position ) {
     return false;
 }
+
+void Object::play() {
+    return;
+}

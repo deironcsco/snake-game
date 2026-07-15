@@ -20,10 +20,13 @@ private:
 public:
     ObjectRegistry( Control* ); // constructor
     void registerObject( Object* ); // add an object to the list
+
+    // object overrides
     // loop through Object::handleEvent's
     void handleEvent( std::optional<sf::Event>, sf::Vector2i mouse_position );
     // loop through Object::handleHover's
     void handleHover( sf::Vector2i mouse_position );
+    void play();
 
     // Drawable override
     void draw( sf::RenderTarget&, sf::RenderStates ) const override;

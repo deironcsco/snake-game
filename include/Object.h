@@ -13,6 +13,7 @@ public:
     bool virtual handleHover( sf::Vector2i mouse_position );
     // what GameState does the object appear in
     GameState virtual getDrawCondition() = 0;
+    void virtual play();
     
     // NOTE: remember Objects also have to implement sf::Drawable::draw
 };

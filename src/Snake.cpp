@@ -34,27 +34,30 @@ Snake::Snake( Window& s_window, GameState& s_gs ) :
 
     // start clock
     clock.start();
+
+    // init direction (to prevent queue::back() seg fault issues)
+    direction_queue.push( Direction::UP );
+
     return;
 }
 
 void Snake::handleEvent( std::optional<sf::Event> event, sf::Vector2i mouse_position ) {
-    std::cout << "Snake::handleEvent() start\n";
+    // std::cout << "Snake::handleEvent() start\n";
     if ( event->is<sf::Event::KeyPressed>() ) {
-        std::cout << "Snake::handleEvent() handleDirection start\n";
+        // std::cout << "Snake::handleEvent() handleDirection start\n";
         handleDirection( event->getIf<sf::Event::KeyPressed>()->code );
-        std::cout << "Snake::handleEvent() handleDirection end\n";
+        // std::cout << "Snake::handleEvent() handleDirection end\n";
     }
-    move();
-    std::cout << "Snake::handleEvent() end\n";
+    // std::cout << "Snake::handleEvent() end\n";
     return;
 }
 
 void Snake::move() {
     // should also only move if gs is start game
     int isquare_size{ window.getSquareSize<int>() };
-    std::cout << "Snake::move() curr time: " << clock.getElapsedTime().asSeconds() << "\n";
+    // std::cout << "Snake::move() curr time: " << clock.getElapsedTime().asSeconds() << "\n";
     sf::Time curr{ clock.getElapsedTime() };
-    if (curr.asSeconds() >= 0.3) {  //.2
+    if (curr.asSeconds() >= 0.2) {  //.2
         //dequeueing direction
         if (!direction_queue.empty()) { // TODO does this make sense?
             // std::cout << "\ndir " << direction <<'\n';                    
@@ -89,14 +92,14 @@ void Snake::move() {
         }
         
         //print direction
-        std::cout << "Snake::move() direction: " << static_cast<std::underlying_type<GameState>::type>( direction ) << "\n";
+        // std::cout << "Snake::move() direction: " << static_cast<std::underlying_type<GameState>::type>( direction ) << "\n";
         // print dir queue
         if (!direction_queue.empty()) {
-            std::cout << "Snake::move() dir queue front: " << static_cast<std::underlying_type<GameState>::type>( direction_queue.front() ) << "\n";
-            std::cout << "Snake::move() dir queue size: " << static_cast<std::underlying_type<GameState>::type>( direction_queue.size() ) << "\n";
-            std::cout << "Snake::move() dir queue back: " << static_cast<std::underlying_type<GameState>::type>( direction_queue.back() ) << "\n";
+            // std::cout << "Snake::move() dir queue front: " << static_cast<std::underlying_type<GameState>::type>( direction_queue.front() ) << "\n";
+            // std::cout << "Snake::move() dir queue size: " << static_cast<std::underlying_type<GameState>::type>( direction_queue.size() ) << "\n";
+            // std::cout << "Snake::move() dir queue back: " << static_cast<std::underlying_type<GameState>::type>( direction_queue.back() ) << "\n";
         } else {
-            std::cout << "Snake::move() dir queue: empty!\n";
+            // std::cout << "Snake::move() dir queue: empty!\n";
         }
         
         //move snake and game over testing
@@ -147,7 +150,7 @@ void Snake::move() {
         
         clock.restart();
     }
-    std::cout << "Snake::move(): end\n";
+    // std::cout << "Snake::move(): end\n";
 }
 
 void Snake::handleDirection(sf::Keyboard::Key key) {
@@ -193,6 +196,7 @@ void Snake::handleDirection(sf::Keyboard::Key key) {
                 direction_queue.back() != Direction::RIGHT) {
                 direction_queue.push(Direction::LEFT);
         }
+        break;
     }
     //S key
     case sf::Keyboard::Key::S: {
@@ -206,6 +210,7 @@ void Snake::handleDirection(sf::Keyboard::Key key) {
                 direction_queue.back() != Direction::UP) {
                 direction_queue.push(Direction::DOWN);
         }
+        break;
     }
     }
     return;
@@ -225,13 +230,24 @@ void Snake::reInitPosition() {
         snake.pop_back();
     }
     snake[0].setPosition(center_position_game);
+
+    // reinit direction and direction_queue
+    for ( int i { 0 }; i < direction_queue.size(); i++ ) {
+        direction_queue.pop();
+    }
+    direction = Direction::UP;
+    direction_queue.push( Direction::UP );
     return;
 }
 
+
+
 void Snake::play() {
-    // i don't think i need this, because everything's already been handled?
+    move();
     return;
 }
+
+
 
 bool Snake::isOccupiedBySnake(float x, float y, bool exceptFirst) {
     //returns true if inputted x,y coords are occupied by any snake part

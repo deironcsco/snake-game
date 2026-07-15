@@ -30,7 +30,7 @@ public:
     void handleDirection(sf::Keyboard::Key);
     void draw(sf::RenderTarget&, sf::RenderStates) const override;
     void reInitPosition();
-    void play();
+    void play() override;
     bool isOccupiedBySnake(float x, float y, bool exceptFirst);
     void MoveSnake(float x, float y);
     GameState getDrawCondition() override;

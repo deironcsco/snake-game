@@ -38,6 +38,14 @@ void ObjectRegistry::handleHover( sf::Vector2i mouse_position ) {
 };
 
 
+void ObjectRegistry::play() {
+    for ( int i{ 0 }; i < objs.size(); i++ ) {
+        if ( objs[i]->getDrawCondition() == *( ctrl->game_state ) ) {
+            objs[i]->play();
+        }
+    }
+}
+
 
 // Drawable override
 // draw all objects in the list
